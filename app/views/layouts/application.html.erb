@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= controller.action_name %></title>
+
+	<% get_css.each do |sheet| %>
+		<%= stylesheet_link_tag sheet %>
+	<% end %>
+	<% get_js.each do |js|%>
+		<%= javascript_include_tag js %>
+	<% end%>
+</head>
+
+<body>		 
+	<div id="header">
+	</div><!--end header-->
+	<div id="info_bar">
+	</div><!--end info_bar-->
+	<div id="container">
+		<%= render :partial => 'global/flash', :locals => { :flash => flash }%>
+		<%= yield  %>		
+	</div><!--end container-->
+</body>
+</html>

@@ -9,11 +9,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090410224843) do
+ActiveRecord::Schema.define(:version => 20090416220124) do
+
+  create_table "bids", :force => true do |t|
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "customers", :force => true do |t|
     t.string   "name"
     t.string   "powerpro_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lanes", :force => true do |t|
+    t.integer  "status"
+    t.float    "price"
+    t.float    "price_min"
+    t.string   "price_mode"
+    t.string   "special_requirements"
+    t.string   "volume_committed"
+    t.string   "trailer_type"
+    t.string   "business_relationship"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,26 @@
+<div id="center">
+	<% form_for @lane do |f|%>
+		<%= f.label "price"%>
+		<%= f.text_field :price %>
+
+		<%= f.label "price mode"%>
+		<%= f.select :price_mode, ["CPM"] %>
+
+		<%= f.label "special requirements"%>
+		<%= f.text_field :special_requirements %>
+
+		<%= f.label "trailer type"%>
+		<%= f.select :trailer_type, ["Reefer"] %>
+		
+		<%= f.label "volume committed"%>
+		<%= f.text_field :volume_committed %>
+
+		<%= f.label "business relationship"%>
+		<%= f.text_field :business_relationship %>
+
+		<%= f.label "status"%>
+		<%= f.select :status, [["proposed",0]] %>
+
+		<%= f.submit "create"%>
+	<% end %>
+</div><!--end center-->

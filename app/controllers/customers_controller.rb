@@ -18,4 +18,9 @@ class CustomersController < ApplicationController
     @customer = Customer.find( params[:id] )
   end#show
 
+  def index
+    @customers = Customer.find(:all)
+  end#index
+
+
 end#class

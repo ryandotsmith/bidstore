@@ -1,0 +1,20 @@
+<div id="center">
+<table>
+<thead>
+  <tr>
+	  <th></th>
+	  <th></th>  
+  </tr>
+</thead>
+
+<tbdoy>
+	<% for lane in @lanes %>
+  <tr>
+    <td><%= lane.created_at %></td>
+    <td><%= lane.bid.customer.name %></td>
+    <td></td>  
+  </tr>
+	<% end %>	
+</tbody>
+</table>
+</div><!--end center-->

@@ -9,6 +9,7 @@ class CreateLanes < ActiveRecord::Migration
       t.string :volume_committed 
       t.string :trailer_type
       t.string :business_relationship
+      t.text   :comments
       t.timestamps
     end
   end

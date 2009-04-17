@@ -10,3 +10,12 @@ describe Lane do
     Lane.create!(@valid_attributes)
   end
 end
+
+describe "building a new lane with location" do
+  before(:each) do
+    params = {}
+  
+  end
+
+end
+

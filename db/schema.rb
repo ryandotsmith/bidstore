@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090416220124) do
+ActiveRecord::Schema.define(:version => 20090416230726) do
 
   create_table "bids", :force => true do |t|
     t.integer  "customer_id"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(:version => 20090416220124) do
     t.string   "volume_committed"
     t.string   "trailer_type"
     t.string   "business_relationship"
+    t.text     "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.integer  "lane_id"
+    t.integer  "mode"
+    t.float    "lat"
+    t.float    "lng"
+    t.string   "location_string"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

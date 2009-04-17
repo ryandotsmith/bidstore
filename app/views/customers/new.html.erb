@@ -1,7 +1,21 @@
 <div id="center">
-	<% form_for @customer do |f|%>
-		<%= f.text_field :name %>
-		<%= f.text_field :powerpro_id %>
-		<%= f.submit "create"%>
+	<ul class='form'>
+	<% form_for @customer, :html => { :class => 'std_form' } do |f|%>
+		
+		<li>
+			<%= f.label "Name"%>
+			<%= f.text_field :name %>
+		</li>
+		
+		<li>
+			<%= f.label "PowerPro ID"%>
+			<%= f.text_field :powerpro_id %>
+		</li>
+
+		<li>
+			<%= f.submit "create"%>
+		</li>
+
 	<% end %>
+	</ul>
 </div><!--end center-->

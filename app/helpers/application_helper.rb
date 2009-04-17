@@ -5,7 +5,7 @@ module ApplicationHelper
   ####################
   #get_css
   def get_css
-    []
+    ['std','form','list','table']
   end#get_css
   
   ####################

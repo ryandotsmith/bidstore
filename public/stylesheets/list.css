@@ -1,0 +1,43 @@
+/* Class = Form */
+ul.form {
+	list-style:none;
+	text-decoration:none;
+}
+ul.form li {
+	margin-top:2em;
+}
+ul.form li.cancel {
+	text-align:center;
+	width:14em;
+	padding:7px;
+	border: 3px outset white;
+	background-color:red;
+	color:white;
+}
+ul.form li.cancel a {
+	font-family:arial;
+	font-size:20px;
+	text-decoration:none;
+	color:white;
+}
+/* Class = show. This is for general forms in any show action */
+
+ul.show {
+	list-style:none;
+	text-decoration:none;
+	min-width:30em;
+	margin-left:0;
+	padding-left:0;
+}
+ul.show li {
+	width:auto;
+	padding:.5em;
+	color:white;
+	background-color:#584E4E;
+}
+li:hover.true {
+	background-color:green;
+}
+li:hover.false {
+	background-color:red;
+}

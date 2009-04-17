@@ -1,10 +1,11 @@
 class BidsController < ApplicationController
+
   def new
-    @bid = Bid.new
+    @bid = @customer.bids.build
   end
 
   def create
-    @bid = Bid.new( params[:bid] )
+    @bid = @customer.bids.build( params[:bid] )
     if @bid.save
       flash[:success] = "new bid was created"
       redirect_to @bid
@@ -15,5 +16,12 @@ class BidsController < ApplicationController
 
   def show
   end
+protected
+
+  ####################
+  #load_customer
+  def load_customer
+    @customer = Customer.find( params[:customer_id] )
+  end#load_customer
 
 end

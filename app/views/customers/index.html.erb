@@ -1,0 +1,21 @@
+<div id="center">
+	<table>
+	<thead>
+	  <tr>
+		  <th>Name</th>
+		  <th>PowerPro ID</th>  
+	  </tr>
+	</thead>
+
+	<tbdoy>
+		<% @customers.each do |customer| %>
+	  <tr>
+	    <td><%= customer.name %></td>
+	    <td><%= customer.powerpro_id %></td>
+	  </tr>
+		<%end%>
+	</tbody>
+	</table>
+	<%= link_to "add new customer", new_customer_path %>
+</div><!--end center-->
+

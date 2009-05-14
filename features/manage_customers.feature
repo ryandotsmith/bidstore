@@ -8,4 +8,4 @@ Feature Manage Customers
 		And I fill in "customer_name" with "Acme"
 		When I press "create"
 		Then I should see "added Acme to the database"
-		
+	

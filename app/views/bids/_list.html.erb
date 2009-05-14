@@ -1,0 +1,19 @@
+<table id='customer_bids_index_table' class='tablesorter'>
+<caption>Bids</caption>
+<thead>
+  <tr>
+  <th>Created At</th>
+  <th>Comments</th>  
+	<th>Lanes</th>
+  </tr>
+</thead>
+<tbdoy>
+	<% bids.each do |bid|%>
+  <tr>
+    <td><%= link_to bid.created_at, bid %></td>
+    <td><%= bid.comments.to_s[0..24] + "..."%></td>
+		<td><%= "23" %></td>
+  </tr>
+	<% end %>
+</tbody>
+</table>

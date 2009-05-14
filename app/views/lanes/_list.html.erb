@@ -1,0 +1,24 @@
+<table class='tablesorter'>
+<caption>Lanes</caption>
+<thead>
+  <tr>
+	  <th>Created At</th>
+	  <th>Created For</th>  
+	  <th>Origin</th>  
+	  <th>Destination</th>  
+
+  </tr>
+</thead>
+
+<tbdoy>
+	<% for lane in lanes %>
+  <tr>
+    <td><%= lane.created_at %></td>
+    <td><%= lane.bid.customer.name %></td>
+    <td><%= lane.origin_location.location_string %></td>
+    <td><%= lane.destination_location.location_string %></td>
+
+  </tr>
+	<% end %>	
+</tbody>
+</table>

@@ -1,7 +1,29 @@
 <div id="center">
-	<% form_for @bid do |f|%>
-		<%= f.label "Customer ID"%>
-		<%= f.text_field :customer_id%>
-		<%= f.submit "create"%>
+	<div id="context_nav">
+			<ul>
+				<li><%= link_to "back to customer", @customer %> </li>
+			</ul>		
+			<h2>New Bid for <%= @customer.name %></h2>
+	</div><!--end context_nav-->
+	<% form_for [ @customer,@bid ] do |bid_form|%>
+			<table id='lanes'>
+				<thead>
+					<th>Origin</th>
+					<th>Destination</th>
+					<th>Price</th>
+					<th>Mode</th>					
+					<th>Trailer</th>					
+					<th>Volume</th>					
+				</thead>
+			<tbody>
+				<%= render :partial => 'lanes/lane', :locals => {:f => bid_form} %>
+			</tbody>
+	</table>
+			<%= add_lane_link bid_form, "add lane"%>
+			<%= bid_form.label :comments%>
+			<%= bid_form.text_area :comments, :size => '30x2'%>
+			<br />
+			<br />
+			<%= bid_form.submit "add bids"%>
 	<% end %>
 </div><!--end center-->

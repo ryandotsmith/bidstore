@@ -4,9 +4,8 @@ Feature Ability to organize bids
 	I want to organize my bids
 	
 	Scenario: Adding a new bid 
-		Given I am on the new bid page 
-		And a customer exists with an id of "12345"
-		When I fill in "bid_customer_id" with "123445"
+		Given a customer exists with an id of "12345"
+		And I visit the new bid page 
 		And I press "create"
-		Then I should see "new bid was created"
+		Then I should see "new bid was created for customer 12345"
 		

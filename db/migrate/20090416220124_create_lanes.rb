@@ -1,6 +1,7 @@
 class CreateLanes < ActiveRecord::Migration
   def self.up
     create_table :lanes do |t|
+      t.belongs_to :bid
       t.integer :status
       t.float :price
       t.float :price_min

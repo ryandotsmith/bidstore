@@ -4,7 +4,7 @@ Feature: Creating a lane that belongs to a bid
 	I want to add lanes to a bid. 
 	
 	Scenario: creating a new lane 
-		Given I am on the new lane page 
+		Given I visit the new lane page 
 		And I fill in origin with "64105"
 		And I fill in destination with "CA"
 		And I fill in "price" with "4.50"

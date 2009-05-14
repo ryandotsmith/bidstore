@@ -1,50 +1,6 @@
 <div id="center">
-	<ul class='form'>
-	<% form_for @lane, :html => {:class => 'std_form'} do |f|%>
-		<% f.fields_for :origin_location do |ol|%>
-		<li><%= ol.label "Origin Location"%></li>
-		<li><%= ol.text_field :location_string %></li>
-				<%= ol.hidden_field :mode, :value => 0%>
-		<% end %>
-		<% f.fields_for :destination_location do |dl|%>
-		<li><%= dl.label "Destination Location"%></li>
-		<li><%= dl.text_field :location_string %></li>
-				<%= dl.hidden_field :mode, :value => 1%>
-		<% end %>
-
-		<li>
-			<%= f.label "price"%>
-			<%= f.text_field :price %>
-		</li>
-
-		<li>
-			<%= f.label "price mode"%>
-			<%= f.select :price_mode, ["CPM"] %>
-		</li>
-
-		<li>
-			<%= f.label "special requirements"%>
-			<%= f.text_field :special_requirements %>
-		</li>
-		<li>
-			<%= f.label "trailer type"%>
-			<%= f.select :trailer_type, ["Reefer"] %>
-		</li>
-		<li>		
-			<%= f.label "volume committed"%>
-			<%= f.text_field :volume_committed %>
-		</li>
-		<li>
-			<%= f.label "business relationship"%>
-			<%= f.text_field :business_relationship %>
-		</li>
-		<li>
-			<%= f.label "status"%>
-			<%= f.select :status, [["proposed",0]] %>
-		</li>
-		<li>
-			<%= f.submit "create"%>
-		</li>
+	<% form_for [ @bid,@lane ] do |f|%>	
+	<%= render :partial => 'form', :locals => { :l => f}%>	
+	<%= f.submit "create"%>
 	<% end %>
-	</ul>
 </div><!--end center-->

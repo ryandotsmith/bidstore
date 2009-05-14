@@ -1,21 +1,22 @@
 <div id="center">
-	<ul class='form'>
+	<div id="context_nav">
+			<ul>
+				<li><%= link_to "back to customers",customers_path %> </li>
+			</ul>		
+			<h2>Create New Customer</h2>
+	</div><!--end context_nav-->
+
 	<% form_for @customer, :html => { :class => 'std_form' } do |f|%>
 		
-		<li>
 			<%= f.label "Name"%>
 			<%= f.text_field :name %>
-		</li>
 		
-		<li>
 			<%= f.label "PowerPro ID"%>
 			<%= f.text_field :powerpro_id %>
-		</li>
 
-		<li>
-			<%= f.submit "create"%>
-		</li>
+			<br />
+			<br />
+			<%= f.submit "create customer"%>
 
 	<% end %>
-	</ul>
 </div><!--end center-->

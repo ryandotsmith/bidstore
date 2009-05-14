@@ -1,0 +1,35 @@
+<% f.fields_for :lanes do |l|%>
+<tr class='lane'>
+	<% l.fields_for :origin_location do |ol|%>
+	<td>
+		<%= ol.text_field :location_string %>
+		<%= ol.hidden_field :mode, :value => 0%>
+	</td>
+	<% end %>			
+
+	<% l.fields_for :destination_location do |dl|%>
+	<td>
+		<%= dl.text_field :location_string %>
+		<%= dl.hidden_field :mode, :value => 1%>
+	</td>
+	<% end %>
+
+
+<td>
+	<%= l.text_field :price, :class => 'small' %>
+</td>
+
+<td>
+	<%= l.select :price_mode, ["CPM"] %>
+</td>
+
+<td>
+	<%= l.select :trailer_type, ["Reefer"] %>
+</td>
+
+<td>		
+	<%= l.text_field :volume_committed , :class => 'med'%>
+</td>
+<td><%= link_to_function "remove", "$(this).parent().parent().remove()" %></td>
+</tr>	
+<% end %>

@@ -1,0 +1,18 @@
+<% for customer in customers %>
+
+	<div class="box">
+
+	 	<%= link_to customer.name , customer %>
+	 	<br />
+		<%=h customer.powerpro_id %>		
+		<br />
+		<%=h "Bids: " + customer.bids.count.to_s %>
+		<br />
+		<%=h "Lanes: 42 " %>
+
+	</div><!--end box-->
+
+<% end %>
+
+
+

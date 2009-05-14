@@ -1,15 +1,22 @@
 class LanesController < ApplicationController
-  ORIGIN = 0
-  DESTINATION = 1
+  before_filter :load_bid, :only => [ :new,:create ]
+
+  def index
+    @lanes = Lane.find( :all )
+  end
 
   def new
-    @lane = Lane.new
+    @lane = @bid.lanes.build
     @lane.build_origin_location
     @lane.build_destination_location
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end 
 
   def create
-    @lane = Lane.new( params[:lane] )
+    @lane = @bid.lanes.build( params[:lane] )
     if @lane.save
       flash[:success] = "success! Lane was created "
       redirect_to @lane
@@ -18,12 +25,13 @@ class LanesController < ApplicationController
     end
   end
   
-  def index
-    @lanes = Lane.find( :all )
-  end
-  
   def show
     @lane = Lane.find( params[:id] )
   end
-
+protected 
+  ####################
+  #load_bid
+  def load_bid
+    @bid = Bid.find( params[:bid_id] )
+  end#load_bid
 end

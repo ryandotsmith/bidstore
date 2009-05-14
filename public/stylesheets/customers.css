@@ -1,0 +1,15 @@
+#customer_list {
+	width:100%;
+}
+#etc {
+	clear:left;
+}
+.box {
+	float:left;
+	width:200px;
+	height:100px;
+	margin-left:10px;
+	margin-top:5px;
+	padding:5px;
+	background-color:#BCBDE0 ;
+}

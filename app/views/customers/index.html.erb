@@ -1,21 +1,18 @@
 <div id="center">
-	<table>
-	<thead>
-	  <tr>
-		  <th>Name</th>
-		  <th>PowerPro ID</th>  
-	  </tr>
-	</thead>
+	<div id="context_nav">
+			<ul>
+				<li><%= link_to "add new customer", new_customer_path %> </li>
+			</ul>		
+			<h2>Customers</h2>
 
-	<tbdoy>
-		<% @customers.each do |customer| %>
-	  <tr>
-	    <td><%= customer.name %></td>
-	    <td><%= customer.powerpro_id %></td>
-	  </tr>
-		<%end%>
-	</tbody>
-	</table>
-	<%= link_to "add new customer", new_customer_path %>
+	</div><!--end context_nav-->
+
+	<div id="customer_list">
+		<%= render :partial => 'list', :locals => { :customers => @customers }%>		
+	</div><!--end customer_list-->
+
+	<div id="etc">
+	</div><!--end etc-->
+
 </div><!--end center-->
 

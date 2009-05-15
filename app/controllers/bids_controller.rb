@@ -5,8 +5,9 @@ class BidsController < ApplicationController
   end
 
   def new
+    @counter = Counter.new
     @bid  = @customer.bids.build
-    2.times {@bid.lanes.build}
+    @bid.lanes.build
     @bid.lanes.each { |lane| lane.build_origin_location      }
     @bid.lanes.each { |lane| lane.build_destination_location }
   end

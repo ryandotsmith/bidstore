@@ -16,10 +16,9 @@
 					<th>Volume</th>					
 				</thead>
 			<tbody>
-				<%= render :partial => 'lanes/lane', :locals => {:f => bid_form} %>
 			</tbody>
 	</table>
-			<%= add_lane_link bid_form, "add lane"%>
+			<%= add_object_link( "add lane", bid_form, Lane.prep(), 'lanes/lane', "#lanes" )%>
 			<%= bid_form.label :comments%>
 			<%= bid_form.text_area :comments, :size => '30x2'%>
 			<br />

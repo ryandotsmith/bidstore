@@ -1,19 +1,5 @@
 module BidsHelper
 
-  def add_lane_link(form_builder, name )
-    link_to_function name do |page|
-      page.insert_html :bottom, :lanes, :partial => 'lanes/lane',
-                                        :locals  => {:f => form_builder, :lane => Lane.prep }
-    end
-  end
-
-  def js(data)
-    if data.respond_to? :to_json
-      data.to_json
-    else
-      data.inspect.to_json
-    end
-  end
 
   def add_object_link(name, form, object, partial, where)
       #options = { :parent => true }.merge(options)
@@ -25,6 +11,13 @@ module BidsHelper
       }
   end
 
+  def js(data)
+    if data.respond_to? :to_json
+      data.to_json
+    else
+      data.inspect.to_json
+    end
+  end
 
 
 end

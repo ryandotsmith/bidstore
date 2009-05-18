@@ -22,5 +22,20 @@ class CustomersController < ApplicationController
     @customers = Customer.find(:all)
   end#index
 
+  def edit
+    @customer = Customer.find( params[:id] )
+  end
+
+  def update
+    @customer = Customer.find( params[:id] )
+    respond_to do |format|
+      if @customer.update_attributes( params[:customer] )
+        format.html { redirect_to @customer }
+        format.js
+      else
+        format.html { render :action => 'edit' }  
+      end
+    end
+  end
 
 end#class

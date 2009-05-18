@@ -1,3 +1,5 @@
+/*  ELEMENTS  */
+
 * { margin:0; padding:0;}
 body {
 	min-width: 550px;
@@ -5,13 +7,30 @@ body {
 	font-family:helvetica;
 }
 h1 {
-	margin-bottom:15px;
+	margin:10px;
+	padding:5px;
+	clear:left;
+
+	font-family:"Lucida Grande",arial,sans-serif;
+	font-size:14px;
+	font-weight:bold;
+	background-color:#DBE6F0;
 }
 h2 {
 	margin-bottom:5px;
 	padding-left:5px;
 	font-weight:normal;
 }
+a {
+	font-family:verdana;
+	font-size:12px;
+	color:green;
+	padding-right:4px;
+}
+img {
+	border:none;
+}
+/*  Structure */
 #header {
 	position:relative;
 	width:100%;
@@ -40,17 +59,19 @@ h2 {
 	left:0;
 	width:800px;
 	background-color:#DBE6F0;
+	font-family:verdana;
 }
 #context_nav ul {
 	float:right;
 	padding-right:10px;
+	margin-top:25px;
 }
 #context_nav li {
 	display:inline;
 	list-style:none;
 }
 #context_nav a {
-	font-size:10pt;
+	font-size:11px;
 	color:green;
 	padding-right:4px;
 }
@@ -71,10 +92,17 @@ h2 {
 #center {
 	position:relative;
 	clear:both;
+	float:left;
 	margin-left:60px;
-	padding:4em 0;
+	padding:3em 0;
 	width: 800px;
 	background-color:#ffffff;
+}
+#right {
+	float:left;
+	margin-top:3em;
+	margin-left:15px;
+	width:300px;
 }
 #waiting_divs {
 	position:absolute;

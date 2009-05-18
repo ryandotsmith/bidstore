@@ -1,11 +1,20 @@
 <div id="center">
 	<div id="context_nav">
 			<ul>
-				<li><%= link_to "edit customer", new_customer_path %> | </li>
+				<li><%= link_to "edit customer", edit_customer_path %> </li>
 				<li><%= link_to "create new bid", new_customer_bid_path(@customer) %> </li>
 			</ul>		
-			<h2><%= @customer.name %></h2>
+			<h1><%= @customer.name %></h1>
 	</div><!--end context_nav-->
-	<%= "PowerPro id <strong>" + @customer.powerpro_id + "</strong>"%> 
+	<%= link_to "back to customers" , customers_path %>
+	<br />
 	<%= render :partial => 'bids/list', :locals => { :bids => @customer.bids }%>
 </div><!--end center-->
+<div id="right">
+
+		<h1>Customer Info</h1>
+		<ul>
+			<li><%= "PowerPro ID " + "<strong>" +  @customer.powerpro_id + "</strong>" %></li>
+		</ul>
+
+</div><!--end right-->

@@ -1,9 +1,6 @@
 <div id="center">
 	<div id="context_nav">
-			<ul>
-				<li><%= link_to "back to customer", @customer %> </li>
-			</ul>		
-			<h2>New Bid for <%= @customer.name %></h2>
+		<h1>New Bid</h1>
 	</div><!--end context_nav-->
 	<% form_for [ @customer,@bid ] do |bid_form|%>
 			<table id='lanes'>
@@ -23,6 +20,7 @@
 			<%= bid_form.text_area :comments, :size => '30x2'%>
 			<br />
 			<br />
-			<%= bid_form.submit "add bids"%>
+			<%= bid_form.submit "add bids"%> or 
+			<%= link_to "back to <strong>#{@customer.name }</strong>", @customer %>
 	<% end %>
 </div><!--end center-->

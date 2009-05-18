@@ -1,6 +1,10 @@
 module BidsHelper
 
 
+  def prepare_html
+
+  end
+
   def add_object_link(name, form, object, partial, where)
       #options = { :parent => true }.merge(options)
       html = render(:partial => partial, :locals => { :f => form }, :lane => object)

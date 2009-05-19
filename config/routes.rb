@@ -1,6 +1,9 @@
 ActionController::Routing::Routes.draw do |map|
-  map.root :controller => 'customers', :action => 'index'
 
+  map.root :controller => 'customers', :action => 'index'
+  
+  map.resources :settings
+  
   map.resources :customers do |customers|
     customers.resources :bids, :name_prefix => 'customer_'
   end

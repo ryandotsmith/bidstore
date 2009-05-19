@@ -6,6 +6,6 @@ Feature Ability to organize bids
 	Scenario: Adding a new bid 
 		Given a customer exists with an id of "12345"
 		And I visit the new bid page 
-		And I press "create"
+		And I press "add bids"
 		Then I should see "new bid was created for customer 12345"
 		

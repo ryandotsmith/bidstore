@@ -24,8 +24,21 @@ h2 {
 a {
 	font-family:verdana;
 	font-size:12px;
-	color:green;
-	padding-right:4px;
+	color:#007E36;
+	padding:4px;
+}
+a:hover {
+	background-color:#007E36;
+	color:white;
+}
+a.simple  {
+	color:black;
+	font-family:verdana;
+	font-size:12px;
+}
+a:hover.simple  {
+	color:black;
+	background-color:#ffffff;
 }
 img {
 	border:none;
@@ -72,7 +85,6 @@ img {
 }
 #context_nav a {
 	font-size:11px;
-	color:green;
 	padding-right:4px;
 }
 #container {

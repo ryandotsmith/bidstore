@@ -1,13 +1,12 @@
 <div id="center">
 	<div id="context_nav">
-			<ul>
-				<li><%= link_to "back to #{@customer.name}",@customer %> </li>
-			</ul>		
 			<h2>Edit Customer</h2>
 	</div><!--end context_nav-->
 
 	<% form_for @customer, :html => { :class => 'std_form' } do |f|%>
 		<%= render :partial => 'attr_form', :locals => { :f => f }%>
 		<%= f.submit "update customer"%>
+		or
+		<%= link_to "back to #{@customer.name}",@customer %>		
 	<% end %>
 </div><!--end center-->

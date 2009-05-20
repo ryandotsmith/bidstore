@@ -2,8 +2,8 @@
 
 	<div class="box">
 
-	 	<h2><%= link_to customer.name , customer %></h2>
-	 	<br />
+	 	<h2><%= link_to customer.name , customer , :class => 'simple'%></h2>
+		
 		<%=h customer.powerpro_id %>		
 		<br />
 		<%=h "Bids: " + customer.bids.count.to_s %>

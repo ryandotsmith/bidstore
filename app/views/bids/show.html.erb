@@ -1,5 +1,5 @@
 <div id="center">
-	<h1><%= link_to @bid.customer.name, @bid.customer %></h1>
+	<h1>back to <%= link_to @bid.customer.name, @bid.customer %></h1>
 	<h2><%="PowerPro ID: " + @bid.customer.powerpro_id %></h2>
 	<%= render :partial => 'lanes/list', :locals => { :lanes => @bid.lanes }%>
 	<%= link_to "add lanes", new_bid_lane_path(@bid) %>

@@ -6,7 +6,7 @@
 			</ul>		
 			<h1><%= @customer.name %></h1>
 	</div><!--end context_nav-->
-	<%= link_to "back to customers" , customers_path %>
+	<a class='simple'>back to</a> <%= link_to "customers" , customers_path %>
 	<br />
 	<%= render :partial => 'bids/list', :locals => { :bids => @customer.bids }%>
 </div><!--end center-->

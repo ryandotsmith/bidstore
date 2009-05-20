@@ -2,6 +2,7 @@
 <caption>Bids</caption>
 <thead>
   <tr>
+  <th>Details</th>
   <th>Created At</th>
   <th>Comments</th>  
 	<th>Lanes</th>
@@ -10,7 +11,8 @@
 <tbdoy>
 	<% bids.each do |bid|%>
   <tr>
-    <td><%= link_to bid.created_at, bid %></td>
+		<td><%= link_to "details", bid, :class => :simple %></td>
+    <td><%= bid.created_at %></td>
     <td><%= bid.comments.to_s[0..24] + "..."%></td>
 		<td><%= "23" %></td>
   </tr>

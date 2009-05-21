@@ -1,5 +1,5 @@
 class Lane < ActiveRecord::Base
-  
+  has_many :locations
   belongs_to :bid
   # Mode = 0 => that the location object is an origin location 
   has_one :origin_location, :class_name => "Location", :conditions => "mode = 0"

@@ -16,6 +16,23 @@ class Location < ActiveRecord::Base
     result.full_address
   end#to_s
   
+  ####################
+  def self.filter_query( params )
+    array = params.scan(/.[^:-]*/)
+    case array.length
+    when 1
+      origin = array.first.strip
+    when 2
+      origin      = array.first.strip
+      destination = array.last.sub(/-/,"").strip
+    when 3
+      objects     = array.first
+      origin      = array.second.sub(/:/,"").strip
+      destination = array.third.sub(/-/,"").strip
+    end
+    {:objects => objects, :origin => origin, :destination => destination}
+  end
+  
 private
 
   def geocode_address

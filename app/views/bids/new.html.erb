@@ -14,8 +14,8 @@
 				</thead>
 			<tbody>
 			</tbody>
-	</table>
-			<%= add_object_link( "add lane", bid_form, Lane.prep(), 'lanes/lane', "#lanes" )%>
+ 	</table>
+			<%= render :partial => 'lanes/lane', :locals => { :f => bid_form }, :lane => Lane.prep()%>
 			<%= bid_form.label :comments%>
 			<%= bid_form.text_area :comments, :size => '30x2'%>
 			<br />

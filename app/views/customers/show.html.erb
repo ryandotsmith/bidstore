@@ -1,20 +1,16 @@
 <div id="center">
-	<div id="context_nav">
-			<ul>
-				<li><%= link_to "edit customer", edit_customer_path %> </li>
-				<li><%= link_to "create new bid", new_customer_bid_path(@customer) %> </li>
-			</ul>		
-			<h1><%= @customer.name %></h1>
-	</div><!--end context_nav-->
-	<a class='simple'>back to</a> <%= link_to "customers" , customers_path %>
-	<br />
-	<%= render :partial => 'bids/list', :locals => { :bids => @customer.bids }%>
+  <div id="context_nav">
+    <h1><%= @customer.name %><%= link_to "edit customer", edit_customer_path %></h1>
+  </div><!--end context_nav-->
+  <a class='simple'>back to</a> <%= link_to "customers" , customers_path %>
+  <br />
+  <%= render :partial => 'bids/list', :locals => { :bids => @customer.bids }%>
 </div><!--end center-->
 <div id="right">
-
-		<h1>Customer Info</h1>
-		<ul>
-			<li><%= "PowerPro ID " + "<strong>" +  @customer.powerpro_id + "</strong>" %></li>
-		</ul>
+  <%= link_to "#{ image_tag 'new_bid_button.png'}",new_customer_bid_path(@customer)  %>
+  <h1>Customer Info</h1>
+  <ul>
+    <li><%= "PowerPro ID " + "<strong>" +  @customer.powerpro_id + "</strong>" %></li>
+  </ul>
 
 </div><!--end right-->

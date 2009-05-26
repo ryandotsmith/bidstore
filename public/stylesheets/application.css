@@ -2,160 +2,171 @@
 
 * { margin:0; padding:0;}
 body {
-	min-width: 550px;
-	background-color:#DEDEDE;
-	font-family:verdana;
+  min-width: 550px;
+  background-color:#DEDEDE;
+  font-family:verdana;
 }
 h1 {
-	margin:10px;
-	padding:5px;
-	clear:left;
+  margin:10px;
+  padding:5px;
+  clear:left;
 
-	font-family:helvetica;
-	font-size:15px;
-	font-weight:bold;
-	background-color:#DBE6F0;
+  font-family:helvetica;
+  font-size:15px;
+  font-weight:bold;
+  background-color:#DBE6F0;
 }
 h2 {
-	margin-bottom:5px;
-	padding-left:5px;
-	font-weight:normal;
+  margin-bottom:5px;
+  padding-left:5px;
+  font-weight:normal;
+}
+a.obvious {
+  font-family:verdana;
+  font-size:12px;
+  color:#007E36;
+  padding:4px;
+}
+a:hover.obvious {
+  background-color:#007E36;
+  color:white;
 }
 a {
-	font-family:verdana;
-	font-size:12px;
-	color:#007E36;
-	padding:4px;
+  color:#333333;
+  font-family:verdana;
+  font-size:10px;
 }
 a:hover {
-	background-color:#007E36;
-	color:white;
-}
-a.simple  {
-	color:black;
-	font-family:verdana;
-	font-size:12px;
-}
-a:hover.simple  {
-	color:black;
-	background-color:#ffffff;
+  color:black;
 }
 img {
-	border:none;
+  border:none;
 }
 /*  Structure */
 #header {
-	position:relative;
-	width:100%;
-	height:100px;
-	margin:0 auto;
-	background-color:#2E221D;
+  position:relative;
+  width:100%;
+  height:100px;
+  margin:0 auto;
+  background-color:#2E221D;
 }
 #navigation {
 
 }
 #navigation ul {
-	color:white;
-	list-style:none;
+  color:white;
+  list-style:none;
 }
 #navigation li {
-	padding-left:5px;
-	padding-right:5px;
-	display:inline;
+  padding-left:5px;
+  padding-right:5px;
+  display:inline;
 }
 #navigation a {
-	color:#C5BBD2;
+  color:#C5BBD2;
 }
 #context_nav {
-	position:absolute;
-	top:0;
-	left:0;
-	width:800px;
-	background-color:#DBE6F0;
-	font-family:verdana;
+  position:absolute;
+  top:0;
+  left:0;
+  width:800px;
+  background-color:#DBE6F0;
+  font-family:verdana;
 }
 #context_nav ul {
-	float:right;
-	padding-right:10px;
-	margin-top:25px;
+  float:right;
+  padding-right:10px;
+  margin-top:25px;
 }
 #context_nav li {
-	display:inline;
-	list-style:none;
+  display:inline;
+  list-style:none;
 }
 #context_nav a {
-	font-size:11px;
-	padding-right:4px;
+  font-size:11px;
+  padding-right:4px;
 }
 #container {
-	position:relative;
-	min-height:30em;
-	margin: 10px auto;
-	margin-top:0;
-	
-	background-color: #DEDEDE;
-	color: #333;
-	line-height: 130%;
-	
-	font-family:verdana;
+  position:relative;
+  min-height:30em;
+  margin: 10px auto;
+  margin-top:0;
+
+  background-color: #DEDEDE;
+  color: #333;
+  line-height: 130%;
+
+  font-family:verdana;
 
 }
 
 #center {
-	position:relative;
-	clear:both;
-	float:left;
-	margin-left:60px;
-	padding:3em 0;
-	width: 800px;
-	background-color:#ffffff;
+  position:relative;
+  clear:both;
+  float:left;
+  margin-left:60px;
+  padding:3em 0;
+  width: 800px;
+  background-color:#ffffff;
 }
 #right {
-	float:left;
-	margin-top:3em;
-	margin-left:15px;
-	width:300px;
+  float:left;
+  margin-top:3em;
+  margin-left:15px;
+  width:300px;
 }
 #waiting_divs {
-	position:absolute;
-	top:0;
-	height:auto;
-	width:700px;
-	margin-left:12%;
-	background-color:gray;
-	padding:1em;
+  position:absolute;
+  top:0;
+  height:auto;
+  width:700px;
+  margin-left:12%;
+  background-color:gray;
+  padding:1em;
 }
 .inside_waiting_div {
-	position:relative;
-	background-color:#2E306B;
-	min-height:300px;
-	min-width:600px;
-	padding-bottom:25px;
+  position:relative;
+  background-color:#2E306B;
+  min-height:300px;
+  min-width:600px;
+  padding-bottom:25px;
 }
 #waiting_divs .close a {
-	position:absolute;
-	height:20px;
-	width:100%;
-	bottom:0;
-	padding-top:3px;
-	padding-bottom:3px;
-	text-align:right;
-	border-top:2px solid white;
-	background-color:#414141;
-	color:white;
-	font-size:16pt;
+  position:absolute;
+  height:20px;
+  width:100%;
+  bottom:0;
+  padding-top:3px;
+  padding-bottom:3px;
+  text-align:right;
+  border-top:2px solid white;
+  background-color:#414141;
+  color:white;
+  font-size:16pt;
 }
 
 
 /*   FORMS   */
 form {
-	margin-left:15px;
-	font:16pt Times;
+  margin-left:15px;
+  font:16pt Times;
 }
 label {
-	float: none;
-	text-align:left;
-	display:block;
-	color: gray;
-	font: 20px Arial;
+  float: none;
+  text-align:left;
+  display:block;
+  color: gray;
+  font: 20px Arial;
 }
+/* Special DIVS*/
+#new_object {
+  width:200px;
+  height:42px;
+}
+#new_object a {
+  color:black;
+}
+#new_object a:hover {
+  background-color:transparent;
+}
+

@@ -1,18 +1,13 @@
 module BidsHelper
 
-
-  def prepare_html
-
-  end
-
   def add_object_link(name, form, object, partial, where)
-      #options = { :parent => true }.merge(options)
-      html = render(:partial => partial, :locals => { :f => form }, :lane => object)
-      link_to_function name, %{
+    #options = { :parent => true }.merge(options)
+    html = render(:partial => partial, :locals => { :f => form }, :lane => object)
+    link_to_function name, %{
         var new_object_id = new Date().getTime() ;
         var html = jQuery(#{js html}.replace(/index_to_replace_with_js/g, new_object_id));
         html.appendTo(jQuery("#{where}"));
-      }
+      } 
   end
 
   def js(data)
@@ -22,7 +17,6 @@ module BidsHelper
       data.inspect.to_json
     end
   end
-
 
 end
 

@@ -1,18 +1,16 @@
 <div id="center">
-	<div id="context_nav">
-			<ul>
-				<li><%= link_to "add new customer", new_customer_path %> </li>
-			</ul>		
-			<h2>Customers</h2>
+  <div id="context_nav">
+    <h2>Customers</h2>
+  </div><!--end context_nav-->
 
-	</div><!--end context_nav-->
+  <div id="customer_list">
+    <%= render :partial => 'list', :locals => { :customers => @customers }%>		
+  </div><!--end customer_list-->
 
-	<div id="customer_list">
-		<%= render :partial => 'list', :locals => { :customers => @customers }%>		
-	</div><!--end customer_list-->
-
-	<div id="etc">
-	</div><!--end etc-->
+  <div id="etc">
+  </div><!--end etc-->
 
 </div><!--end center-->
-
+<div id="right">
+  <%= link_to "#{ image_tag 'new_customer_button.png'}", new_customer_path %>  
+</div>

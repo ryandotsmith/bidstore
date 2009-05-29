@@ -15,7 +15,7 @@ Feature: Searching for lanes or bids based on geographic location
 
 
 	Scenario: I query with City parameters and then remove the origin and add a destination
-		Given I am on a lane show page
+		Given I visit the show lane page
 		When I fill in "search_q" with "66216"
 		And I press "search"
 		Then I should see "bids and lanes" with destination "66216"
@@ -27,7 +27,7 @@ Feature: Searching for lanes or bids based on geographic location
 		
 		
 	Scenario: I query with Address parameters 
-		Given I am on a customer show page
+		Given I visit the show bid page
 		When I fill in "search_q" with "2540 S. 88th St. Kansas City KS"
 		And I press "search"
 		Then I should see "bids and lanes" with destination "2540 S. 88th St. Kansas City KS"

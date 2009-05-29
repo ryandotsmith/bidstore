@@ -11,7 +11,7 @@ end
 Factory.define :lane do |l|
   l.association :bid, :factory => :bid
   l.origin_location {|original| original.association( :location, :mode => "0") }
-  l.destination_location {|destination| original.association( :location, :mode => "1") }
+  l.destination_location {|destination| destination.association( :location, :mode => "1") }
 
 end
 

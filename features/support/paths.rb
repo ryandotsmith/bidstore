@@ -24,8 +24,10 @@ module NavigationHelpers
       new_bid_path
     when /the new lane page/
       new_lane_path
-      
-    
+    when /the customers index page/
+      customers_path
+    when /the lane show page/
+      bid_lane_path(Lane.create)
     # Add more page name => path mappings here
     
     else

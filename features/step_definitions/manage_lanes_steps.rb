@@ -11,3 +11,10 @@ Given /^I visit the new lane page$/ do
   @bid        = Factory( :bid , :customer => @customer )
   visit new_bid_lane_url(@bid)
 end
+
+Given /^I visit the show lane page$/ do
+  @customer   = Factory( :customer )
+  @bid        = Factory( :bid , :customer => @customer )
+  @lane       = Factory( :lane, :bid      => @bid )
+  visit bid_lane_url(@bid,@lane)
+end

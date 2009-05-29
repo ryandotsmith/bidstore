@@ -13,60 +13,97 @@ describe "search" do
       @seeker.includes.should == ['bids']
     end
 
-    it "should pick out lanes" do      
+    it "should pick out lanes with orig and dest defined" do      
       string = "lanes: 66216 - california"
-      result = {:objects => 'lanes', :origin => '66216', :destination => 'california' }
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)      
+      @seeker.filter_query()
+
+      @seeker.origin.should == '66216'
+      @seeker.destination.should == 'california'
+      @seeker.includes.should == ['lanes']
     end
 
-    it "should pick out lanes" do      
+    it "should pick out lanes with no spec" do      
       string = "lanes: 66216 "
-      result = {:objects => 'lanes', :origin => '66216', :destination => '66216'}
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)      
+      @seeker.filter_query()
+      
+      @seeker.origin.should == '66216'
+      @seeker.destination.should == '66216'
+      @seeker.includes.should == ['lanes']
+      
     end
 
-    it "should pick out lanes" do      
+    it "should pick out lanes with dest defined" do      
       string = "lanes: -66216 "
-      result = {:objects => 'lanes', :origin => "", :destination => '66216'}
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)      
+      @seeker.filter_query()
+      
+      @seeker.origin.should == nil
+      @seeker.destination.should == '66216'
+      @seeker.includes.should == ['lanes']
+      
+    end
+
+    it "should pick out lanes with dest defined" do      
+      string = "lanes: 66216- "
+      @seeker = Seeker.new(string)
+      @seeker.filter_query()
+      
+      @seeker.origin.should == '66216'
+      @seeker.destination.should == nil
+      @seeker.includes.should == ['lanes']
+      
     end
 
     it "should handle request without object type" do
       string = "66216 - Kansas City"
-      result = {:objects => nil, :origin => '66216', :destination => 'Kansas City' }
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)      
+      @seeker.filter_query()
+      
+      @seeker.origin.should == "66216"
+      @seeker.destination.should == "Kansas City"
+      @seeker.includes.should == ['lanes','bids']
     end
 
     it "should handle a request wiht one parameter" do
       string = "Oklahoma"
-      result = {:objects => nil, :origin => 'Oklahoma', :destination => "Oklahoma" } 
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)      
+      @seeker.filter_query()
+      
+      @seeker.origin.should == "Oklahoma"
+      @seeker.destination.should == "Oklahoma"
+      @seeker.includes.should == ['lanes','bids']
     end    
 
-    it "should handle a request wiht one parameter" do
+    it "should handle a request with only orig defined" do
       string = "Oklahoma-"
-      result = {:objects => nil, :origin => 'Oklahoma', :destination => nil } 
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)      
+      @seeker.filter_query()
+
+      @seeker.origin.should == "Oklahoma"
+      @seeker.destination.should == nil
+      @seeker.includes.should == ['lanes','bids']      
     end    
 
-    it "should handle a request wiht one parameter" do
+    it "should handle a request with only destination defined" do
       string = "-Oklahoma"
-      result = {:objects => nil, :origin => nil, :destination => "Oklahoma" } 
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)      
+      @seeker.filter_query()
+      
+      @seeker.origin.should == nil
+      @seeker.destination.should == "Oklahoma"
+      @seeker.includes.should == ['lanes','bids']
     end    
 
-    it "should handle queries that are looking only for a destination" do
+    it "pick out lanes" do
       string = "lanes:64105-Oklahoma"
-      result = { :objects => "lanes", :origin => "64105", :destination => "Oklahoma"}
       @seeker = Seeker.new(string)
-      @seeker.filter_query().should == (result)
+      @seeker.filter_query()
+      
+      @seeker.origin.should == "64105"
+      @seeker.destination.should == "Oklahoma"
+      @seeker.includes.should == ['lanes']      
     end
   end # describe filter
 
@@ -114,14 +151,49 @@ describe "search" do
       @bid      = Factory( :bid      )
       @lane     = Factory( :lane, :origin_location      =>  @location_one,
                                   :destination_location =>  @location_two)
-      search_string = "66216-"
-      @seeker = Seeker.new(search_string)
+      string = "bids: -66216"
+      @seeker = Seeker.new( string )
       @seeker.filter_query()
-      query = @seeker.build_query()
-      eval( query.first ).length.should == 1 
+      @seeker.origin.should == nil
     end
 
   end
+
+  describe "executing the query and combining the results" do
+    before(:each) do
+      @location_one = Factory( :location, :location_string => "66216", :mode => 0)
+      @location_two = Factory( :location, :location_string => "64105", :mode => 1)
+
+      @location_three = Factory( :location, :location_string => "alabama", :mode => 0)
+      @location_four  = Factory( :location, :location_string => "california", :mode => 1)
+
+
+      @customer = Factory( :customer )
+      @bid      = Factory( :bid      )
+      @lane     = Factory( :lane, :origin_location      =>  @location_one,
+                                  :destination_location =>  @location_two)
+      
+    end
+
+    it "should do something?" do
+      string = "bids: -64105"
+      @seeker = Seeker.new( string )
+      @seeker.filter_query()
+      @seeker.build_query()
+      @seeker.execute().first.class.to_s.should == "Bid"
+    end
+
+    it "should do something else?" do
+      string = "lanes: -64105"
+      @seeker = Seeker.new( string )
+      @seeker.filter_query()
+      @seeker.build_query()
+      @seeker.execute().first.class.to_s.should == "Lane"
+    end
+
+  end
+
+
 
 end # end search
 

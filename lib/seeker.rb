@@ -6,11 +6,16 @@ class String
 end
 
 class Seeker
-  attr_accessor :origin, :destination, :includes
-
+  attr_accessor :origin, :destination, :includes, :query
   def initialize( string )
     @q_string     =   string
     @includes     =   []
+  end
+
+  def run()
+    self.filter_query()
+    self.build_query()
+    self.execute()
   end
 
   def filter_query()                                         	
@@ -18,14 +23,15 @@ class Seeker
     if !@q_string.scan(/:/).length.zero? # string has a :
       @includes << @q_string.split(':').first.strip
       remainder = @q_string.split(':').second
-      if !remainder.scan(/-/).length.zero?
-        @origin      = remainder.split('-').first.strip  unless remainder.split('-').first.length.zero?
-        @destination = remainder.split('-').last.strip unless remainder.split('-').last.length.zero? 
-      else
+      if !remainder.scan(/-/).length.zero? #string has a -
+        @origin      = remainder.split('-').first.strip.peel  unless remainder.split('-').first.length.zero?
+        @destination = remainder.split('-').last.strip.peel unless remainder.split('-').last.length.zero? 
+      else # string does not have a -
         @origin      =	remainder.strip
         @destination =  remainder.strip
       end 
     elsif !@q_string.scan(/-/).length.zero? # string has -
+      @includes = ['lanes','bids']
       if @q_string.first == "-"
         @destination = @q_string.split('-').last.strip
       elsif @q_string.last == "-" 
@@ -35,6 +41,7 @@ class Seeker
         @destination = @q_string.split('-').last.strip
       end
     else
+      @includes = ['lanes','bids']
       @origin      = @q_string
       @destination = @q_string
     end
@@ -42,16 +49,49 @@ class Seeker
   end
 
   def build_query()
-    query = Array.new
+    @query = Array.new
     if @origin and @destination
-      query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
-      query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"
-    elsif @origin and !@destination
-      query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
-    elsif @destination and !@origin
-      query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"  
+      @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
+      @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"
+    elsif @origin and @destination.nil?
+      @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
+    elsif @destination and @origin.nil?
+      @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"  
     end
-    query
+    @query
   end
   
+  def execute()
+    locations = Array.new
+    lanes   = Array.new
+    bids    = Array.new
+    @query.each {|statement| locations << eval( statement) }
+
+    locations.flatten!
+    
+    if @includes.include?( 'lanes' )
+      locations.each { |location| lanes << location.lane }
+    end#if
+    
+    
+    if @includes.include?( 'bids' )
+      locations.each do |location|
+        bids << location.lane.bid 
+      end # do lane
+    end #if
+    
+    if @includes.include?('bids') and @includes.include?('lanes')
+      return ( lanes + bids )
+    end
+
+    if @includes.include?('bids') and !@includes.include?('lanes')
+      return bids
+    end
+
+    if !@includes.include?('bids') and @includes.include?('lanes')
+      return lanes
+    end
+    
+  end#def
+
 end

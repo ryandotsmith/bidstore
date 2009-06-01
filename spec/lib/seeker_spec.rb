@@ -177,10 +177,8 @@ describe "search" do
 
       @lane_one = Factory( :lane, :bid      => @bid,
                                   :origin_location      =>  @location_three,
-                                  :destination_location =>  @location_four )
-        
-      
-    end
+                                  :destination_location =>  @location_four )      
+    end#before
 
     it "should only return bids" do
       string = "bids: -64105"
@@ -188,6 +186,7 @@ describe "search" do
       @seeker.filter_query()
       @seeker.build_query()
       @seeker.execute().all? {|object| object.class.to_s == "Bid"}.should eql( true )
+      @seeker.execute().all? {|object| object.class.to_s == "Lane"}.should eql( false )
     end
 
     it "should only return lanes" do

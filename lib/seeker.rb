@@ -50,23 +50,29 @@ class Seeker
 
   def build_query()
     @query = Array.new
+
     if @origin and @destination
       @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
       @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"
+
     elsif @origin and @destination.nil?
       @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
+
     elsif @destination and @origin.nil?
       @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"  
     end
-    @query
+
+    return @query
   end
   
   def execute()
     locations = Array.new
     lanes     = Array.new
     bids      = Array.new
+
     @query.each {|statement| locations << eval( statement) }
     locations.flatten!
+
     if @includes.include?( 'lanes' )
       locations.each do |location|
         lanes << location.lane

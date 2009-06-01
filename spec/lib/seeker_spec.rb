@@ -185,8 +185,8 @@ describe "search" do
       @seeker = Seeker.new( string )
       @seeker.filter_query()
       @seeker.build_query()
-      @seeker.execute().all? {|object| object.class.to_s == "Bid"}.should eql( true )
-      @seeker.execute().all? {|object| object.class.to_s == "Lane"}.should eql( false )
+      @seeker.execute()[:lanes].should eql( nil )
+      @seeker.execute()[:bids].length.zero?.should_not eql( true )
     end
 
     it "should only return lanes" do
@@ -194,8 +194,8 @@ describe "search" do
       @seeker = Seeker.new( string )
       @seeker.filter_query()
       @seeker.build_query()
-      @seeker.execute().all? {|object| object.class.to_s == "Lane"}.should eql( true )
-      @seeker.execute().any? {|object| object.class.to_s == "Bid"}.should eql( false )      
+      @seeker.execute()[:lanes].length.zero?.should_not eql( true )
+      @seeker.execute()[:bids].should eql( nil )
     end
 
     it "should return lanes and bids" do
@@ -203,8 +203,8 @@ describe "search" do
       @seeker = Seeker.new( string )
       @seeker.filter_query()
       @seeker.build_query()
-      @seeker.execute().any? {|object| object.class.to_s == "Lane"}.should eql( true )
-      @seeker.execute().any? {|object| object.class.to_s == "Bid"}.should eql( true )      
+      @seeker.execute()[:lanes].length.zero?.should_not eql( true )
+      @seeker.execute()[:bids].length.zero?.should_not eql( true )
     end
 
     it "should return lanes and bids" do
@@ -212,8 +212,8 @@ describe "search" do
       @seeker = Seeker.new( string )
       @seeker.filter_query()
       @seeker.build_query()
-      @seeker.execute().any? {|object| object.class.to_s == "Lane"}.should eql( true )
-      @seeker.execute().any? {|object| object.class.to_s == "Bid"}.should eql( true )      
+      @seeker.execute()[:lanes].length.zero?.should_not eql( true )
+      @seeker.execute()[:bids].length.zero?.should_not eql( true )
     end
 
 

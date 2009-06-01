@@ -1,3 +1,6 @@
-<%= form_tag '/search'%>
-	<%= text_field_tag :search_q %>
-	<%= submit_tag 'search' %>
+<div id="search_q">
+	<% form_for '/search', :url => search_path do |s| %>
+		<%= text_field_tag :search_q %>
+		<%= submit_tag 'go' %>
+	<% end %>	
+</div><!--end serch_q-->

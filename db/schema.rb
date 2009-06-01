@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(:version => 20090416230726) do
   create_table "bids", :force => true do |t|
     t.integer  "customer_id"
     t.text     "comments"
+    t.integer  "status",      :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20090416230726) do
 
   create_table "lanes", :force => true do |t|
     t.integer  "bid_id"
-    t.integer  "status"
+    t.integer  "status",                :default => 0
     t.float    "price"
     t.float    "price_min"
     t.string   "price_mode"

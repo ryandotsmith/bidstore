@@ -1,4 +1,47 @@
 <div id="center">
-	<% for item in @results %>
+	<% if @results[:lanes] %>
+		<table>
+			<caption> <%= @results[:lanes].length %> lanes </caption>
+		<thead>
+		  <tr>
+		  <th>Status</th>
+		  <th>Price</th>  
+		  <th>Trailer</th>  
+		  </tr>
+		</thead>
+		<tbdoy>
+			<% @results[:lanes].each do |lane| %>
+		  <tr>
+		    <td><%= interpret lane.status %></td>
+		    <td><%= lane.price %></td>
+		    <td><%= lane.trailer_type %></td>
+		  </tr>
+			<% end %>
+		</tbody>
+		</table>
 	<% end %>
+
+	<% if @results[:bids] %>
+	
+	<table>
+		<caption><%= @results[:bids].length %> bids </caption>
+	<thead>
+	  <tr>
+	  <th>Customer</th>
+	  <th>Comments</th>  
+	  <th>Status</th>  
+	  </tr>
+	</thead>
+	<tbdoy>
+		<% @results[:bids].each do |bid| %>
+	  <tr>
+	    <td><%= bid.customer.name %></td>
+	    <td><%= shorten bid.comments, 20 %></td>
+	    <td><%= interpret bid.status %></td>
+	  </tr>
+		<% end %>
+	</tbody>
+	</table>
+	<% end %>
+
 </div><!--end center-->

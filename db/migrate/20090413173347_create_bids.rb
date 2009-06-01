@@ -3,6 +3,7 @@ class CreateBids < ActiveRecord::Migration
     create_table :bids do |t|
       t.belongs_to :customer
       t.text :comments
+      t.integer :status, :default => 0
       t.timestamps
     end
   end

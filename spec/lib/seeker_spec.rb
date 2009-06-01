@@ -199,7 +199,7 @@ describe "search" do
     end
 
     it "should return lanes and bids" do
-      string = "new york - California"
+      string = "newyork-California"
       @seeker = Seeker.new( string )
       @seeker.filter_query()
       @seeker.build_query()

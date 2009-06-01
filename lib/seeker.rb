@@ -63,17 +63,16 @@ class Seeker
   
   def execute()
     locations = Array.new
-    lanes   = Array.new
-    bids    = Array.new
+    lanes     = Array.new
+    bids      = Array.new
     @query.each {|statement| locations << eval( statement) }
-
     locations.flatten!
-    
     if @includes.include?( 'lanes' )
-      locations.each { |location| lanes << location.lane }
+      locations.each do |location|
+        lanes << location.lane
+      end
     end#if
-    
-    
+        
     if @includes.include?( 'bids' )
       locations.each do |location|
         bids << location.lane.bid 

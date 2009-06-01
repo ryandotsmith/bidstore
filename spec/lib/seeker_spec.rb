@@ -164,32 +164,59 @@ describe "search" do
       @location_one = Factory( :location, :location_string => "66216", :mode => 0)
       @location_two = Factory( :location, :location_string => "64105", :mode => 1)
 
-      @location_three = Factory( :location, :location_string => "alabama", :mode => 0)
+      @location_three = Factory( :location, :location_string => "new york", :mode => 0)
       @location_four  = Factory( :location, :location_string => "california", :mode => 1)
 
 
-      @customer = Factory( :customer )
-      @bid      = Factory( :bid      )
-      @lane     = Factory( :lane, :origin_location      =>  @location_one,
-                                  :destination_location =>  @location_two)
+      @customer = Factory( :customer                     )
+      @bid      = Factory( :bid , :customer => @customer )
+
+      @lane     = Factory( :lane, :bid      => @bid,
+                                  :origin_location      =>  @location_one,
+                                  :destination_location =>  @location_two )
+
+      @lane_one = Factory( :lane, :bid      => @bid,
+                                  :origin_location      =>  @location_three,
+                                  :destination_location =>  @location_four )
+        
       
     end
 
-    it "should do something?" do
+    it "should only return bids" do
       string = "bids: -64105"
       @seeker = Seeker.new( string )
       @seeker.filter_query()
       @seeker.build_query()
-      @seeker.execute().first.class.to_s.should == "Bid"
+      @seeker.execute().all? {|object| object.class.to_s == "Bid"}.should eql( true )
     end
 
-    it "should do something else?" do
+    it "should only return lanes" do
       string = "lanes: -64105"
       @seeker = Seeker.new( string )
       @seeker.filter_query()
       @seeker.build_query()
-      @seeker.execute().first.class.to_s.should == "Lane"
+      @seeker.execute().all? {|object| object.class.to_s == "Lane"}.should eql( true )
+      @seeker.execute().any? {|object| object.class.to_s == "Bid"}.should eql( false )      
     end
+
+    it "should return lanes and bids" do
+      string = "new york - California"
+      @seeker = Seeker.new( string )
+      @seeker.filter_query()
+      @seeker.build_query()
+      @seeker.execute().any? {|object| object.class.to_s == "Lane"}.should eql( true )
+      @seeker.execute().any? {|object| object.class.to_s == "Bid"}.should eql( true )      
+    end
+
+    it "should return lanes and bids" do
+      string = "California"
+      @seeker = Seeker.new( string )
+      @seeker.filter_query()
+      @seeker.build_query()
+      @seeker.execute().any? {|object| object.class.to_s == "Lane"}.should eql( true )
+      @seeker.execute().any? {|object| object.class.to_s == "Bid"}.should eql( true )      
+    end
+
 
   end
 

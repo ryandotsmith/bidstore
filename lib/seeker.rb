@@ -1,3 +1,4 @@
+require 'extensions/all'
 class String
   def peel()
     return nil if self.length.zero?

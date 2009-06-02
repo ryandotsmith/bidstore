@@ -1,0 +1,133 @@
+--- !ruby/object:Gem::Specification 
+name: extensions
+version: !ruby/object:Gem::Version 
+  version: 0.6.0
+platform: ruby
+authors: []
+
+autorequire: 
+bindir: bin
+cert_chain: 
+date: 2004-12-09 00:00:00 -06:00
+default_executable: rbxtm
+dependencies: []
+
+description: "'extensions' is a set of extensions to Ruby's built-in classes.  It gathers common idioms, useful additions, and aliases, complete with unit testing and documentation, so they are suitable for production code. See http://extensions.rubyforge.org for full documentation."
+email: gsinclair@soyabean.com.au
+executables: 
+- rbxtm
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- ChangeLog
+- HISTORY
+- Rakefile
+- README
+- README.1st
+- VERSION
+- install-doc.rb
+- install.rb
+- install.sh
+- bin/rbxtm
+- lib/extensions
+- lib/extensions/all.rb
+- lib/extensions/array.rb
+- lib/extensions/binding.rb
+- lib/extensions/class.rb
+- lib/extensions/continuation.rb
+- lib/extensions/enumerable.rb
+- lib/extensions/hash.rb
+- lib/extensions/io.rb
+- lib/extensions/kernel.rb
+- lib/extensions/module.rb
+- lib/extensions/numeric.rb
+- lib/extensions/object.rb
+- lib/extensions/ostruct.rb
+- lib/extensions/string.rb
+- lib/extensions/symbol.rb
+- lib/extensions/_base.rb
+- lib/extensions/_template.rb
+- ./test/data
+- ./test/tc_array.rb
+- ./test/tc_binding.rb
+- ./test/tc_class.rb
+- ./test/tc_continuation.rb
+- ./test/tc_enumerable.rb
+- ./test/tc_hash.rb
+- ./test/tc_io.rb
+- ./test/tc_kernel.rb
+- ./test/tc_module.rb
+- ./test/tc_numeric.rb
+- ./test/tc_object.rb
+- ./test/tc_ostruct.rb
+- ./test/tc_string.rb
+- ./test/tc_symbol.rb
+- ./test/TEST.rb
+- ./test/data/kernel_test
+- ./test/data/kernel_test/global_var_1.rb
+- ./test/data/kernel_test/global_var_2.rb
+- etc/checklist
+- etc/website
+- etc/website/index.html
+- etc/website/upload.sh
+- test/tc_array.rb
+- test/tc_binding.rb
+- test/tc_class.rb
+- test/tc_continuation.rb
+- test/tc_enumerable.rb
+- test/tc_hash.rb
+- test/tc_io.rb
+- test/tc_kernel.rb
+- test/tc_module.rb
+- test/tc_numeric.rb
+- test/tc_object.rb
+- test/tc_ostruct.rb
+- test/tc_string.rb
+- test/tc_symbol.rb
+has_rdoc: "true"
+homepage: http://extensions.rubyforge.org
+post_install_message: 
+rdoc_options: 
+- --title
+- Ruby/Extensions API Documentation
+- --main
+- README
+- --inline-source
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">"
+    - !ruby/object:Gem::Version 
+      version: 0.0.0
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: 
+- Ruby 1.8 (or 'ruby_shim' from RAA)
+rubyforge_project: extensions
+rubygems_version: 1.3.1
+signing_key: 
+specification_version: 1
+summary: "'extensions' is a set of extensions to Ruby's built-in classes.  It gathers common idioms, useful additions, and aliases, complete with unit testing and documentation, so they are suitable for production code."
+test_files: 
+- test/tc_array.rb
+- test/tc_binding.rb
+- test/tc_class.rb
+- test/tc_continuation.rb
+- test/tc_enumerable.rb
+- test/tc_hash.rb
+- test/tc_io.rb
+- test/tc_kernel.rb
+- test/tc_module.rb
+- test/tc_numeric.rb
+- test/tc_object.rb
+- test/tc_ostruct.rb
+- test/tc_string.rb
+- test/tc_symbol.rb

@@ -170,16 +170,27 @@ label {
 #new_object a:hover {
   background-color:transparent;
 }
-#search_q {
+#search {
 	margin-top:20px;
-	margin-left:295px;
+	margin-left:515px;
 }
-#search_q input {
+#search input {
 	font-size:14px;
 	padding:2px;
 	width:200px;
 }
-#search_q input[type=submit] {
+#search input[type=submit] {
 	width:40px;
 	height:27px;
+}
+#search select {
+	font-size:14px;
+	padding:2px;
+
+
+}
+#logo {
+	float:left;
+	margin-top:5px;
+	margin-left:15px;
 }

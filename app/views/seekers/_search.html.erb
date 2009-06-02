@@ -1,6 +1,8 @@
-<div id="search_q">
+<div id="search">
 	<% form_for '/search', :url => search_path do |s| %>
-		<%= text_field_tag :search_q %>
+		<%= text_field_tag :search_q , params[:search_q]%>
+		<%= select_tag :radius, 
+		[100,200,300,400,500,600,1000].map {|i| params[:radius].to_i == i ? "<option selected='selected'>#{i}</option>" : "<option>#{i}</option>"} %>
 		<%= submit_tag 'go' %>
 	<% end %>	
 </div><!--end serch_q-->

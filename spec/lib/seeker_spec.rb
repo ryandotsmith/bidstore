@@ -109,7 +109,7 @@ describe "search" do
 
   describe "building a find query based on the filtered result" do
     it "should do something" do
-      @seeker = Seeker.new("66216-")
+      @seeker = Seeker.new("66216-", 25 )
       @seeker.filter_query()
       result = []
       result << "Location.find( :all, :origin => '66216', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
@@ -118,7 +118,7 @@ describe "search" do
     end
 
     it "should do something" do
-      @seeker = Seeker.new("-66216")
+      @seeker = Seeker.new("-66216", 25 )
       @seeker.filter_query()
       result = []
       result << "Location.find( :all, :origin => '66216', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"
@@ -127,7 +127,7 @@ describe "search" do
     end
 
     it "should " do
-      @seeker = Seeker.new("66216-64105")
+      @seeker = Seeker.new("66216-64105", 25 )
       @seeker.filter_query()
       result = []
       result << "Location.find( :all, :origin => '66216', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"

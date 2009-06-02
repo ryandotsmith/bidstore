@@ -1,6 +1,23 @@
 <div id="center">
 	<% form_for [ @bid,@lane ] do |f|%>	
-	<%= render :partial => 'form', :locals => { :l => f}%>	
+	<% @f = f %>
+  <table id='lanes'>
+    <thead>
+      <th>Origin</th>
+      <th>Destination</th>
+      <th>Price</th>
+      <th>Mode</th>					
+      <th>Trailer</th>					
+      <th>Volume</th>					
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
 	<%= f.submit "create"%>
 	<% end %>
 </div><!--end center-->
+<div id="right">
+  <div id="new_object">
+    <%= add_object_link "#{ image_tag('new_lane_button.png') }",@f,Lane.prep(),"lane", "#lanes" %>
+  </div>
+</div>

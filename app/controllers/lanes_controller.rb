@@ -9,10 +9,12 @@ class LanesController < ApplicationController
     @lane = @bid.lanes.build
     @lane.build_origin_location
     @lane.build_destination_location
+
     respond_to do |format|
       format.html
       format.js
     end
+
   end 
 
   def create

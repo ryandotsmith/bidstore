@@ -7,9 +7,10 @@ end
 
 class Seeker
   attr_accessor :origin, :destination, :includes, :query
-  def initialize( string )
+  def initialize( string, radius=150 )
     @q_string     =   string
     @includes     =   []
+    @radius       =   radius
   end
 
   def run()
@@ -52,14 +53,14 @@ class Seeker
     @query = Array.new
 
     if @origin and @destination
-      @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
-      @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"
+      @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => #{@radius}, :conditions => ['mode=?',0])"
+      @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => #{@radius}, :conditions => ['mode=?',1])"
 
     elsif @origin and @destination.nil?
-      @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',0])"
+      @query << "Location.find( :all, :origin => '#{@origin}', :include => [:lane => [:bid => [:customer]]], :within => #{@radius}, :conditions => ['mode=?',0])"
 
     elsif @destination and @origin.nil?
-      @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => 25, :conditions => ['mode=?',1])"  
+      @query << "Location.find( :all, :origin => '#{@destination}', :include => [:lane => [:bid => [:customer]]], :within => #{@radius}, :conditions => ['mode=?',1])"  
     end
 
     return @query

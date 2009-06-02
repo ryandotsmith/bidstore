@@ -9,5 +9,3 @@ Feature: Add a new lane to an existing bid
 		Then I should see a link to add lanes 
 		When I follow the link to add new lanes 
 		Then I should see a link to add lanes 
-		
-		

@@ -20,7 +20,7 @@
 <body>		 
 	<div id="header">
 		<%= render :partial => 'global/nav' %>
-		<%= image_tag 'bidstore_logo.png', :id => 'logo'%>
+		<%= link_to "#{ image_tag 'bidstore_logo.png', :id => 'logo' }", root_url %>
 		<%= render :partial => 'seekers/search' %>
 	</div><!--end header-->
 	<div id="container">

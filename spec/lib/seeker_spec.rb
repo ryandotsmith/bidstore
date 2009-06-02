@@ -24,7 +24,7 @@ describe "search" do
     end
 
     it "should pick out lanes with no spec" do      
-      string = "lanes: 66216 "
+      string = "lanes: 66216"
       @seeker = Seeker.new(string)
       @seeker.filter_query()
       
@@ -35,7 +35,7 @@ describe "search" do
     end
 
     it "should pick out lanes with dest defined" do      
-      string = "lanes: -66216 "
+      string = "lanes: -66216"
       @seeker = Seeker.new(string)
       @seeker.filter_query()
       
@@ -46,7 +46,7 @@ describe "search" do
     end
 
     it "should pick out lanes with dest defined" do      
-      string = "lanes: 66216- "
+      string = "lanes: 66216-"
       @seeker = Seeker.new(string)
       @seeker.filter_query()
       

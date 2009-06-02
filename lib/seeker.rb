@@ -1,3 +1,4 @@
+require 'extensions/all'
 class String
   def peel()
     return nil if self.length.zero?
@@ -21,17 +22,24 @@ class Seeker
 
   def filter_query()                                         	
     # if the query specifies an object, pick it from string
-    if !@q_string.scan(/:/).length.zero? # string has a :
+    if !@q_string.scan(/:/).length.zero? # string has a : and possibly a -
       @includes << @q_string.split(':').first.strip
       remainder = @q_string.split(':').second
       if !remainder.scan(/-/).length.zero? #string has a -
-        @origin      = remainder.split('-').first.strip.peel  unless remainder.split('-').first.length.zero?
-        @destination = remainder.split('-').last.strip.peel unless remainder.split('-').last.length.zero? 
+        remainder.strip!
+        if remainder.starts_with?('-') # no origin was defined 
+          @destination = remainder.split('-').last.strip.peel
+        elsif remainder.ends_with?('-')# no destination was defined
+          @origin      = remainder.split('-').first.strip.peel
+        else # ambiguous location 
+          @origin      = remainder.split('-').first.strip.peel  
+          @destination = remainder.split('-').last.strip.peel 
+        end
       else # string does not have a -
         @origin      =	remainder.strip
         @destination =  remainder.strip
       end 
-    elsif !@q_string.scan(/-/).length.zero? # string has -
+    elsif !@q_string.scan(/-/).length.zero? # string has - but not a :
       @includes = ['lanes','bids']
       if @q_string.first == "-"
         @destination = @q_string.split('-').last.strip

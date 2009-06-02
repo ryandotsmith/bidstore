@@ -6,7 +6,9 @@
 		  <tr>
 		  <th>Status</th>
 		  <th>Price</th>  
-		  <th>Trailer</th>  
+		  <th>Origin</th>  
+		  <th>Destination</th>  
+		  <th>Date Submitted</th>  
 		  </tr>
 		</thead>
 		<tbdoy>
@@ -14,7 +16,9 @@
 		  <tr>
 		    <td><%= interpret lane.status %></td>
 		    <td><%= lane.price %></td>
-		    <td><%= lane.trailer_type %></td>
+		    <td><%= lane.origin_location.location_string %></td>
+		    <td><%= lane.destination_location.location_string %></td>
+		    <td><%= date_ify lane.created_at %></td>
 		  </tr>
 			<% end %>
 		</tbody>

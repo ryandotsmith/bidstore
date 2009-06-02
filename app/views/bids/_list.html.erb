@@ -14,7 +14,7 @@
 		<td><%= link_to "details", bid, :class => :simple %></td>
     <td><%= bid.created_at %></td>
     <td><%= bid.comments.to_s[0..24] + "..."%></td>
-		<td><%= "23" %></td>
+		<td><%= bid.lanes.count.to_s %></td>
   </tr>
 	<% end %>
 </tbody>

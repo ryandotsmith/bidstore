@@ -12,8 +12,8 @@
 	<% bids.each do |bid|%>
   <tr>
 		<td><%= link_to "details", bid, :class => :simple %></td>
-    <td><%= bid.created_at %></td>
-    <td><%= bid.comments.to_s[0..24] + "..."%></td>
+    <td><%= date_ify bid.created_at %></td>
+    <td><%= shorten bid.comments, 80 %></td>
 		<td><%= bid.lanes.count.to_s %></td>
   </tr>
 	<% end %>

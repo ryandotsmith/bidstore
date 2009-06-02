@@ -13,7 +13,7 @@
 <tbdoy>
 	<% for lane in lanes %>
   <tr>
-    <td><%= lane.created_at %></td>
+    <td><%= date_ify lane.created_at %></td>
     <td><%= lane.bid.customer.name %></td>
     <td><%= lane.origin_location.location_string %></td>
     <td><%= lane.destination_location.location_string %></td>

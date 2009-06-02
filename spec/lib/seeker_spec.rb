@@ -143,6 +143,10 @@ describe "search" do
       @location_one = Factory( :location, :location_string => "66216", :mode => 0)
       @location_two = Factory( :location, :location_string => "64105", :mode => 1)
 
+      @location_one = Factory( :location, :location_string => "Oklahoma", :mode => 0)
+      @location_two = Factory( :location, :location_string => "Nebraska", :mode => 1)
+
+
       @location_three = Factory( :location, :location_string => "alabama", :mode => 0)
       @location_four  = Factory( :location, :location_string => "california", :mode => 1)
 
@@ -158,8 +162,7 @@ describe "search" do
     end
 
   end
-
-  describe "executing the query and combining the results" do
+  describe "execution" do
     before(:each) do
       @location_one = Factory( :location, :location_string => "66216", :mode => 0)
       @location_two = Factory( :location, :location_string => "64105", :mode => 1)
@@ -179,46 +182,61 @@ describe "search" do
                                   :origin_location      =>  @location_three,
                                   :destination_location =>  @location_four )      
     end#before
+    
+      describe "executing the query and combining the results" do
 
-    it "should only return bids" do
-      string = "bids: -64105"
-      @seeker = Seeker.new( string )
-      @seeker.filter_query()
-      @seeker.build_query()
-      @seeker.execute()[:lanes].should eql( nil )
-      @seeker.execute()[:bids].length.zero?.should_not eql( true )
-    end
+        it "should only return bids" do
+          string = "bids: -64105"
+          @seeker = Seeker.new( string )
+          @seeker.filter_query()
+          @seeker.build_query()
+          @seeker.execute()[:lanes].should eql( nil )
+          @seeker.execute()[:bids].length.zero?.should_not eql( true )
+        end
 
-    it "should only return lanes" do
-      string = "lanes: -64105"
-      @seeker = Seeker.new( string )
-      @seeker.filter_query()
-      @seeker.build_query()
-      @seeker.execute()[:lanes].length.zero?.should_not eql( true )
-      @seeker.execute()[:bids].should eql( nil )
-    end
+        it "should only return lanes" do
+          string = "lanes: -64105"
+          @seeker = Seeker.new( string )
+          @seeker.filter_query()
+          @seeker.build_query()
+          @seeker.execute()[:lanes].length.zero?.should_not eql( true )
+          @seeker.execute()[:bids].should eql( nil )
+        end
 
-    it "should return lanes and bids" do
-      string = "newyork-California"
-      @seeker = Seeker.new( string )
-      @seeker.filter_query()
-      @seeker.build_query()
-      @seeker.execute()[:lanes].length.zero?.should_not eql( true )
-      @seeker.execute()[:bids].length.zero?.should_not eql( true )
-    end
+        it "should return lanes and bids" do
+          string = "newyork-California"
+          @seeker = Seeker.new( string )
+          @seeker.filter_query()
+          @seeker.build_query()
+          @seeker.execute()[:lanes].length.zero?.should_not eql( true )
+          @seeker.execute()[:bids].length.zero?.should_not eql( true )
+        end
 
-    it "should return lanes and bids" do
-      string = "California"
-      @seeker = Seeker.new( string )
-      @seeker.filter_query()
-      @seeker.build_query()
-      @seeker.execute()[:lanes].length.zero?.should_not eql( true )
-      @seeker.execute()[:bids].length.zero?.should_not eql( true )
-    end
+        it "should return lanes and bids" do
+          string = "California"
+          @seeker = Seeker.new( string )
+          @seeker.filter_query()
+          @seeker.build_query()
+          @seeker.execute()[:lanes].length.zero?.should_not eql( true )
+          @seeker.execute()[:bids].length.zero?.should_not eql( true )
+        end
 
 
-  end
+      end# desc
+  
+      describe "returning unique resluts " do
 
+        it "should not return identical bids" do
+          string = "bids: Kansas City"
+          @seeker = Seeker.new( string, 200 )
+          @seeker.filter_query()
+          @seeker.build_query()
+          @seeker.execute()[:bids].length.should eql( 1 )
+        end
+
+      end#desc unique results 
+
+  end# desc execution 
 
 
 end # end search

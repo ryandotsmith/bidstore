@@ -87,15 +87,15 @@ class Seeker
     end #if
     
     if @includes.include?('bids') and @includes.include?('lanes')
-      return  { :lanes => lanes, :bids => bids }
+      return  { :lanes => lanes.uniq, :bids => bids.uniq }
     end
 
     if @includes.include?('bids') and !@includes.include?('lanes')
-      return { :bids => bids }
+      return { :bids => bids.uniq }
     end
 
     if !@includes.include?('bids') and @includes.include?('lanes')
-      return { :lanes => lanes  }
+      return { :lanes => lanes.uniq  }
     end
     
   end#def

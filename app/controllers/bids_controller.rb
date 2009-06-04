@@ -4,6 +4,10 @@ class BidsController < ApplicationController
     @bids = Bid.find( :all )
   end
 
+  def show
+    @bid = Bid.find( params[:id] )
+  end
+
   def new
     @bid  = @customer.bids.build
     @bid.lanes.build
@@ -15,15 +19,18 @@ class BidsController < ApplicationController
     @bid = @customer.bids.build( params[:bid] )
     if @bid.save
       flash[:success] = "new bid was created for customer #{@customer.id}"
-      redirect_to @bid
+      redirect_to @bid unless @bid.lanes.empty?
+      redirect_to edit_bid_path( @bid ) if @bid.lanes.empty?
     else
       render :action => 'new'
     end
   end
-
-  def show
+  
+  def edit
     @bid = Bid.find( params[:id] )
   end
+
+
   
 protected
   ####################

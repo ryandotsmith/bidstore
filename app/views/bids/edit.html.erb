@@ -1,0 +1,16 @@
+<div id="center">
+	<div id="context_nav">
+		<h1>Update Bid</h1>		
+	</div><!--end context_nav-->
+
+	<% form_for @bid, :multipart => true do |edit_bid|%>
+		<fieldset>
+		<%= edit_bid.label :import_data, "CSV File" %>
+		<%= edit_bid.file_field :import_data %>
+		</fieldset>
+	<% end %>
+
+</div><!--end center-->
+<div id="right">
+
+</div><!--end right-->

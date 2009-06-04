@@ -27,5 +27,11 @@
 <div id="right">
   <div id="new_object">
     <%= add_object_link "#{ image_tag('new_lane_button.png') }",@bid_form,Lane.prep(),"lanes/lane", "#lanes" %>
+
   </div>
+	<p class="tip">
+		If you are importing lanes from a CSV file, go ahead and add this 
+		bid without adding lanes. You will be able to upload your file on the next screen.
+	</p>
+
 </div>

@@ -21,7 +21,7 @@ class Location < ActiveRecord::Base
 private
 
   def geocode_address
-    geo=Geokit::Geocoders::MultiGeocoder.geocode(location_string)
+    geo = Geokit::Geocoders::MultiGeocoder.geocode(location_string)
     errors.add(:location_string, "Could not Geocode address") if !geo.success
     self.lat, self.lng = geo.lat,geo.lng if geo.success
   end

@@ -70,7 +70,7 @@ img {
   position:absolute;
   top:0;
   left:0;
-  width:800px;
+  width:700px;
   background-color:#DBE6F0;
   font-family:verdana;
 }
@@ -159,6 +159,12 @@ label {
   color: gray;
   font: 20px Arial;
 }
+fieldset{
+	background:#F2F2F2 none repeat scroll 0 0	;
+	border:none;
+	padding:20px;
+}
+
 /* Special DIVS*/
 #new_object {
   width:200px;
@@ -192,4 +198,10 @@ label {
 	float:left;
 	margin-top:5px;
 	margin-left:15px;
+}
+.tip {
+	width:200px;
+	font-size:12px;
+	background-color:#EBEEBB;
+	padding:5px;
 }

@@ -9,14 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090416230726) do
+ActiveRecord::Schema.define(:version => 20090604031144) do
 
   create_table "bids", :force => true do |t|
     t.integer  "customer_id"
     t.text     "comments"
-    t.integer  "status",      :default => 0
+    t.integer  "status",                   :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "import_data_file_name"
+    t.string   "import_data_content_type"
+    t.integer  "import_data_file_size"
+    t.datetime "import_data_updated_at"
   end
 
   create_table "customers", :force => true do |t|

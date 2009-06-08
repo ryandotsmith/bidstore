@@ -11,7 +11,7 @@
 </thead>
 
 <tbdoy>
-	<% for lane in lanes %>
+	<% lanes.each do |lane|%>
   <tr>
     <td><%= date_ify lane.created_at %></td>
     <td><%= lane.bid.customer.name %></td>

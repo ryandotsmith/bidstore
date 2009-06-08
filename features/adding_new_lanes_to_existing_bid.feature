@@ -4,8 +4,9 @@ Feature: Add a new lane to an existing bid
 	I want to add lanes to bids at different times.
 	
 	Scenario: Adding lanes when the bid is still pending
-		Given a "bid" exists
-		And I am on the bid show page
-		Then I should see a link to add lanes 
-		When I follow the link to add new lanes 
-		Then I should see a link to add lanes 
+		Given a bid exists with an id of "12345"
+		And I visit the show bid page
+		When I follow "add lanes"
+		# if i can follow the link to add new lane, then everything should work
+		# really need to figure out how to work with JS in cucumber
+		And I follow "add new lane"

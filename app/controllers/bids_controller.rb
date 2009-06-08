@@ -30,7 +30,13 @@ class BidsController < ApplicationController
     @bid = Bid.find( params[:id] )
   end
 
-
+  def update
+    @bid = Bid.find( params[:id] )
+    if @bid.update_attributes( params[:bid] )
+      flash[:success] = "your bid was updated!"
+      redirect_to @bid
+    end
+  end
   
 protected
   ####################

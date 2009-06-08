@@ -18,5 +18,5 @@ Rails::Initializer.run do |config|
   }
 
   config.gem "geokit"
-  #config.gem "extensions"
+  config.gem "acts_as_versioned"
 end

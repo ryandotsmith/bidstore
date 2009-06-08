@@ -7,10 +7,12 @@
 		<fieldset>
 		<%= edit_bid.label :import_data, "CSV File" %>
 		<%= edit_bid.file_field :import_data %>
+		<br />
+		<%= edit_bid.submit "import lanes"%> or <%= link_to "back to bid", @bid %>
 		</fieldset>
-	<% end %>
-
+	<% end %>	
+	
 </div><!--end center-->
-<div id="right">
 
+<div id="right">
 </div><!--end right-->

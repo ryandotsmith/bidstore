@@ -1,4 +1,5 @@
-<% f.fields_for :lanes, lane, :child_index => "index_to_replace_with_js" do |l|%>
+<% controller.action_name == 'edit'? idx = nil : idx = "index_to_replace_with_js" %>
+<% f.fields_for :lanes, lane, :child_index => idx do |l|%>
   <tr class='lane'>
     <% l.fields_for :origin_location do |ol|%>
       <td>

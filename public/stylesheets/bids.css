@@ -12,3 +12,6 @@ table th {
 	font-weight:normal;
 	font-size:12pt;
 }
+input[type=submit] {
+	margin-top:5px;
+}

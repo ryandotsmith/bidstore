@@ -7,7 +7,7 @@
   <%= render :partial => 'bids/list', :locals => { :bids => @customer.bids }%>
 </div><!--end center-->
 <div id="right">
-  <%= link_to "#{ image_tag 'new_bid_button.png'}",new_customer_bid_path(@customer)  %>
+  <%= link_to "#{ image_tag 'new_bid_button.png', :title => 'add bids'} ",new_customer_bid_path(@customer)  %>
   <h1>Customer Info</h1>
   <ul>
     <li><%= "PowerPro ID " + "<strong>" +  @customer.powerpro_id + "</strong>" %></li>

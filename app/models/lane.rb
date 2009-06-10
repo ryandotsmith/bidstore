@@ -14,5 +14,23 @@ class Lane < ActiveRecord::Base
     lane.build_destination_location
     lane
   end
+  
+  def self.build_from( input )
+    results,array = [],[]    
+    FasterCSV.new( input , :headers => true).each {|row| array << row.to_hash }
+    array.each do |row|
+      lane = Lane.new( 
+                  :comments       => row['comments'], 
+                  :trailer_type   => row['trailer_type'],
+                  :price          => row['price'])
+      lane.build_origin_location(:location_string => row['origin'])
+      lane.build_destination_location(:location_string => row['destination'])
+      results << lane
+    end#do 
+    return( results )
+  end
+
 
 end
+
+

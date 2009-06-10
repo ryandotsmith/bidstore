@@ -3,10 +3,10 @@
 		<h1>Update Bid</h1>		
 	</div><!--end context_nav-->
 
-	<% form_for @bid, :multipart => true do |edit_bid|%>
+	<% form_for @bid, :html => { :multipart => true } do |edit_bid|%>
 		<fieldset>
 		<%= edit_bid.label :import_data, "CSV File" %>
-		<%= edit_bid.file_field :import_data %>
+		<%= file_field_tag :csv_file %>
 		<br />
 		<%= edit_bid.submit "import lanes"%> or <%= link_to "back to bid", @bid %>
 		</fieldset>

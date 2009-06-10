@@ -31,6 +31,7 @@ class BidsController < ApplicationController
   end
 
   def update
+    require "rubygems"; require "ruby-debug"; debugger 
     @bid = Bid.find( params[:id] )
     if @bid.update_attributes( params[:bid] )
       flash[:success] = "your bid was updated!"

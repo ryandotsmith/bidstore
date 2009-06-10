@@ -45,3 +45,23 @@ describe "creating a bid along with lanes" do
 
 end
 
+describe "importing lanes from a csv file" do
+    before(:each) do
+      @input = FasterCSV.generate do |csv|
+        csv << [  "origin","destination","miles","volume","rates per mile",
+                  "flat rate charge", "lane capacity", "trailer type", "lane acceptance",
+                  "comments", "check all"]
+        csv << [ "kansas", "california", "999", "100 pallets","8.99","","","reefer","true","good lane",""]
+      end
+    end
+
+    it "should put the data in the csv into a data structure" do
+      #@bid = Factory( :bid )
+      #@bid.make_lanes_from( @input )
+    end
+
+    it "does something" do
+      
+    end
+
+end

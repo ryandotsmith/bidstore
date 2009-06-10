@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090604031144) do
+ActiveRecord::Schema.define(:version => 20090608232714) do
+
+  create_table "bid_versions", :force => true do |t|
+    t.integer  "bid_id"
+    t.integer  "version"
+    t.integer  "customer_id"
+    t.text     "comments"
+    t.integer  "status",                   :default => 0
+    t.datetime "updated_at"
+    t.string   "import_data_file_name"
+    t.string   "import_data_content_type"
+    t.integer  "import_data_file_size"
+    t.datetime "import_data_updated_at"
+  end
+
+  add_index "bid_versions", ["bid_id"], :name => "index_bid_versions_on_bid_id"
 
   create_table "bids", :force => true do |t|
     t.integer  "customer_id"
@@ -21,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20090604031144) do
     t.string   "import_data_content_type"
     t.integer  "import_data_file_size"
     t.datetime "import_data_updated_at"
+    t.integer  "version"
   end
 
   create_table "customers", :force => true do |t|

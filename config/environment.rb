@@ -16,7 +16,9 @@ Rails::Initializer.run do |config|
     :session_key => '_bidstore_session',
     :secret      => '5a81026b32946d079fabdd1280210cdb9d914416434503d7296603ac8c69429af4774c2c27cc81b7106a3c55be70f16cea46b0098bb55fe4e51ef3c573841ba6'
   }
-
+  config.gem "fastercsv"
   config.gem "geokit"
-  config.gem "acts_as_versioned"
+  config.gem 'metaskills-acts_as_versioned' , 
+              :lib => 'acts_as_versioned'   , 
+              :source => 'http://gems.github.com/'
 end

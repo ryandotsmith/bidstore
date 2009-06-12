@@ -15,13 +15,13 @@ class Lane < ActiveRecord::Base
     lane
   end
 
-  def self.determine_location( row )
-    if !row["origin_zip"].empty?
-      return row["origin_zip"]
-    elsif !row["origin_city"].empty?
-      return row["origin_city"]
-    elsif !row["origin_state"].empty?
-      return row["origin_state"]
+  def self.determine_location( type, row )
+    if !row[ type.to_s + "_zip"].empty?
+      return row[type.to_s + "_zip"]
+    elsif !row[type.to_s + "_city"].empty?
+      return row[type.to_s + "_city"]
+    elsif !row[type.to_s + "_state"].empty?
+      return row[type.to_s + "_state"]
     else
       ""
     end
@@ -38,8 +38,8 @@ class Lane < ActiveRecord::Base
                   :miles          => row['miles'],
                   :volume         => row['volume'],
                   :price          => row['rate_per_mile'])
-      lane.build_origin_location( :location_string => Lane.determine_location( row) )
-      lane.build_destination_location( :location_string => Lane.determine_location( row ) )
+      lane.build_origin_location( :location_string => Lane.determine_location( :origin, row ) )
+      lane.build_destination_location( :location_string => Lane.determine_location( :destination, row ) )
       results << lane
     end#do 
     return( results )

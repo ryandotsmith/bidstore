@@ -48,11 +48,11 @@ describe "wrapping tests to stub any calls to geocoding" do
         array = []
         FasterCSV.new( @input , :headers => true).each {|row| array << row.to_hash }
         row   = array.first
-        Lane.determine_location( row ).should eql( "kansas")        
+        Lane.determine_location( :origin, row ).should eql( "kansas")        
       end
       it "should choose a zip code over a state" do
         row = { 'origin_zip' => '66216', 'origin_city' => 'lenexa', 'origin_state' => 'ks' }
-        Lane.determine_location( row ).should eql( "66216" )
+        Lane.determine_location( :origin, row ).should eql( "66216" )
       end
       
     end# determine origin and location

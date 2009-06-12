@@ -40,17 +40,21 @@ class Lane < ActiveRecord::Base
                   :price          => row['rate_per_mile'])
       lane.build_origin_location( :location_string => Lane.determine_location( :origin, row ) )
       lane.build_destination_location( :location_string => Lane.determine_location( :destination, row ) )
-      results << lane
+      results << lane if lane.is_unique?
     end#do 
     return( results )
   end
 
   def ==( other ) 
     similar = false 
-    similar = true if self.origin_location.location_string == other.origin_location.location_string and self.destination_location.location_string == other.destination_location.location_string
+    similar = true if self.origin_location.location_string == other.origin_location.location_string and 
+      self.destination_location.location_string == other.destination_location.location_string
     return( similar )
   end
 
+  def is_unique?
+    !Lane.all.any? { |lane| lane == self }
+  end
 
 end
 

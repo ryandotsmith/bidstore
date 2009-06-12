@@ -1,20 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe "wrapping tests to stub any calls to geocoding" do
+
   before(:each) do
     fake_geocode = OpenStruct.new(:lat => 123.456, :lng => 123.456, :success => true)
     GeoKit::Geocoders::MultiGeocoder.stub!(:geocode).and_return(fake_geocode)
-  end
-
-  describe Lane do
-    before(:each) do
-      @valid_attributes = {
-      }
-    end
-
-    it "should create a new instance given valid attributes" do
-      Lane.create!(@valid_attributes)
-    end
   end
 
   describe "building a new lane with location" do
@@ -38,7 +28,16 @@ describe "wrapping tests to stub any calls to geocoding" do
     end#before
     
     describe "getting the data from CSV " do
-      it "should return an array of lanes from CSV input" do      
+      it "should return an array of lanes from CSV input" do
+        Lane.build_from( @input ).first.class.should eql( Lane )
+      end
+
+      it "should only make unique lanes" do
+        location_one = Factory( :location, :location_string => "kansas", :mode => 0)
+        location_two = Factory( :location, :location_string => "california", :mode => 1)
+        Factory( :lane , :origin_location => location_one, :destination_location => location_two)
+        Lane.build_from( @input ).empty?().should eql( true )
+      end
     end# getting data from CSV
 
     describe "determining the origin and location" do
@@ -94,6 +93,12 @@ describe "wrapping tests to stub any calls to geocoding" do
 
   end
   
-
-end
+  describe "testing a lane for uniqueness " do
+    it "should look around for similar lanes" do
+      location_one = Factory( :location, :location_string => "kansas", :mode => 0)
+      location_two = Factory( :location, :location_string => "california", :mode => 1)
+      lane = Factory( :lane , :origin_location => location_one, :destination_location => location_two)
+      lane.is_unique?().should eql( false )
+    end
+  end
 end

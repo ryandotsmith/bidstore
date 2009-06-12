@@ -58,8 +58,8 @@ describe "importing lanes from a csv file" do
 
     it "should put the data in the csv into a data structure" do
       @bid = Factory( :bid )
-      @bid.lanes << Lane.build_from( @input )
-      @bid.build_unique_lanes( Lane.build_from(@input))
+      @bid.build_unique_lanes( Lane.build_from(@input) )
+      @bid.save
       @bid.lanes.count.should eql( 1 )
     end
 

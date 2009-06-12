@@ -5,7 +5,7 @@ class Bid < ActiveRecord::Base
 
 
   def build_unique_lanes( lanes )
-    
+    self.lanes << lanes
   end
   
 

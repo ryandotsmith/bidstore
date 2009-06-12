@@ -7,9 +7,10 @@ class CreateLanes < ActiveRecord::Migration
       t.float :price_min
       t.string :price_mode
       t.string :special_requirements
-      t.string :volume_committed 
+      t.string :volume
       t.string :trailer_type
       t.string :business_relationship
+      t.string :miles
       t.text   :comments
       t.timestamps
     end

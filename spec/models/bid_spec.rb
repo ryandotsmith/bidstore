@@ -48,20 +48,24 @@ end
 describe "importing lanes from a csv file" do
     before(:each) do
       @input = FasterCSV.generate do |csv|
-        csv << [  "origin","destination","miles","volume","rates per mile",
-                  "flat rate charge", "lane capacity", "trailer type", "lane acceptance",
-                  "comments", "check all"]
-        csv << [ "kansas", "california", "999", "100 pallets","8.99","","","reefer","true","good lane",""]
+        csv << [  "origin_zip","origin_city","origin_state","destination_zip","destination_city","destination_state",
+                  "miles","volume","rates_per_mile",
+                  "flat_rate_charge", "lane_capacity", "trailer_type", "lane_acceptance",
+                  "comments", "check_all" ]
+        csv << [ "","","kansas","","", "california", "999", "100 pallets","8.99","","","reefer","true","good lane",""]
       end
     end
 
     it "should put the data in the csv into a data structure" do
-      #@bid = Factory( :bid )
-      #@bid.make_lanes_from( @input )
+      @bid = Factory( :bid )
+      @bid.lanes << Lane.build_from( @input )
+      @bid.build_unique_lanes( Lane.build_from(@input))
+      @bid.lanes.count.should eql( 1 )
     end
 
-    it "does something" do
-      
+    it "should ensure that the import only keeps unique" do
+        
     end
 
 end
+

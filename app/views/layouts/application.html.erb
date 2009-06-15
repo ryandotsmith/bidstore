@@ -21,7 +21,9 @@
 	<div id="header">
 		<%= render :partial => 'global/nav' %>
 		<%= link_to "#{ image_tag 'bidstore_logo.png', :id => 'logo' }", root_url %>
-		<%= render :partial => 'seekers/search' %>
+		<% default_content_for :search do %>
+			<%= render :partial => 'seekers/search', :locals => {:oclass => nil, :oid => nil } %>
+		<% end %>
 	</div><!--end header-->
 	<div id="container">
 		<%= render :partial => 'global/flash', :locals => { :flash => flash }%>

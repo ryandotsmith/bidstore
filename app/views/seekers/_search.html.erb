@@ -1,8 +1,13 @@
 <div id="search">
 	<% form_for '/search', :url => search_path do |s| %>
+		<% if !!oclass %>
+			<%= hidden_field_tag 'scope', oclass %>
+			<%= hidden_field_tag 'scope_object', oid %>
+		<% end %>
 		<%= text_field_tag :search_q , params[:search_q]%>
 		<%= select_tag :radius, 
 		[100,200,300,400,500,600,1000].map {|i| params[:radius].to_i == i ? "<option selected='selected'>#{i}</option>" : "<option>#{i}</option>"} %>
+		<%= select_tag :scoped, ["universal","local"].map {|i| "<option>#{i}</option>"}%>
 		<%= submit_tag 'go' %>
 	<% end %>	
 </div><!--end serch_q-->

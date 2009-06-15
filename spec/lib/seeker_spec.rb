@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
+
 describe "search" do
 
   describe "filtering query parameters" do    
@@ -162,6 +163,7 @@ describe "search" do
     end
 
   end
+
   describe "execution" do
     before(:each) do
       @location_one = Factory( :location, :location_string => "66216", :mode => 0)
@@ -169,6 +171,9 @@ describe "search" do
 
       @location_three = Factory( :location, :location_string => "new york", :mode => 0)
       @location_four  = Factory( :location, :location_string => "california", :mode => 1)
+
+      @location_five = Factory( :location, :location_string => "66215", :mode => 0)
+      @location_six  = Factory( :location, :location_string => "california", :mode => 1)
 
 
       @customer = Factory( :customer                     )
@@ -180,7 +185,10 @@ describe "search" do
 
       @lane_one = Factory( :lane, :bid      => @bid,
                                   :origin_location      =>  @location_three,
-                                  :destination_location =>  @location_four )      
+                                  :destination_location =>  @location_four )  
+      @lane_two = Factory( :lane, :bid => @bid,
+                                  :origin_location      =>  @location_five,
+                                  :destination_location =>  @location_six )  
     end#before
     
       describe "executing the query and combining the results" do
@@ -236,8 +244,25 @@ describe "search" do
 
       end#desc unique results 
 
+      describe "scope result set based on where search is being executed" do
+        it "should return lanes that belong to bid when on a bid page" do
+           params = {}
+           params[:search_q]  = "66216-"
+           results = Seeker.new( params[:search_q], 100, @bid ).run()
+           results[:bids].should eql( nil )
+           results[:lanes].length.should eql( 1 )
+        end
+        it "should return all lanes mathcing the query when no scope is defined" do
+          params = {}
+          params[:search_q]  = "66216-"
+          results = Seeker.new( params[:search_q], 100 , nil).run()
+          results[:bids].length.should eql( 1 )
+          results[:lanes].length.should eql( 2 )
+        end
+      end
+      
   end# desc execution 
 
-
+  
 end # end search
 

@@ -8,16 +8,17 @@ end
 
 class Seeker
   attr_accessor :origin, :destination, :includes, :query
-  def initialize( string, radius=150 )
+  def initialize(  string, radius=150, object=nil )
     @q_string     =   string
     @includes     =   []
     @radius       =   radius
+    @scope_object =   object      
   end
 
   def run()
     self.filter_query()
     self.build_query()
-    self.execute()
+    self.scope( self.execute() )
   end
 
   def filter_query()                                         	
@@ -106,6 +107,22 @@ class Seeker
       return { :lanes => lanes.uniq  }
     end
     
+  end#def
+
+  def scope( results )
+    bids, lanes = nil, nil
+    case @scope_object.class.to_s
+      when "Bid"
+        return results if results[:lanes].nil?
+        lanes = results[:lanes].find_all { |l| l.bid_id == @scope_object.id }
+      when "Customer"
+        return results if results[:bids].nil?
+        bids = results[:bids].find_all { |l| l.customer_id == @scope_object.id }
+      when "NilClass"
+        # no object was specified so return reulst provided by execute()
+        return( results )
+    end#case
+    { :bids => bids, :lanes => lanes }
   end#def
 
 end

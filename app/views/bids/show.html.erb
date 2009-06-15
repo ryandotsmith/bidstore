@@ -1,4 +1,9 @@
+<% content_for :search do %>
+		<%= render :partial => 'seekers/search', :locals => { :oid => @bid.id , :oclass => Bid }%>
+<% end %>
+
 <div id="center">
+	<% params[:scope] = @bid %>
 	<h1>back to <%= link_to @bid.customer.name, @bid.customer %></h1>
 	<h2><%="PowerPro ID: " + @bid.customer.powerpro_id %></h2>
 	<%= render :partial => 'lanes/list', :locals => { :lanes => @bid.lanes }%>

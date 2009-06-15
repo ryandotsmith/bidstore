@@ -50,22 +50,10 @@ class Lane < ActiveRecord::Base
       self.destination_location.location_string == other.destination_location.location_string
   end
 
-  def is_unique?
-    !Lane.all.any? { |lane| self == lane }
+  def is_unique?( bid=nil )
+    bid.nil? ? lanes = Lane.all : lanes = bid.lanes
+    !lanes.any? { |lane| self == lane }
   end
-
-  ####################
-  #self.gi
-  def self.gi
-    @input = FasterCSV.generate do |csv|
-      csv << [  "origin_zip","origin_city","origin_state","destination_zip","destination_city","destination_state",
-                "miles","volume","rates_per_mile",
-                "flat_rate_charge", "lane_capacity", "trailer_type", "lane_acceptance",
-                "comments", "check_all" ]
-      csv << [ nil,nil,"kansas",nil,nil, "california", "999", "100 pallets","8.99",nil,nil,"reefer","true","good lane",nil]
-    end
-      @input
-  end#self.gi
 
 end
 

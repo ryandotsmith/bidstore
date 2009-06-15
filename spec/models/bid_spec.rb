@@ -1,16 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe Bid do
-  before(:each) do
-    @valid_attributes = {
-    }
-  end
-
-  it "should create a new instance given valid attributes" do
-    Bid.create!(@valid_attributes)
-  end
-end
-
 describe "creating a bid along with lanes" do
   before(:each) do
     fake_geocode = OpenStruct.new(:lat => 123.456, :lng => 123.456, :success => true)
@@ -59,7 +48,11 @@ describe "take an array of lanes and save them with the bid" do
     end
     
     it "should save lanes that are unique to the bid" do
-      
+      @bid  = Factory( :bid )
+      lanes =  Lane.build_from(@input)
+      lanes << Lane.build_from(@input)
+      @bid.build_unique_lanes( lanes )
+      @bid.lanes.count.should eql( 1 )
     end
     
     it "should only save lanes and locations when the bid is saved" do

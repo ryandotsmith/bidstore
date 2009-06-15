@@ -39,10 +39,12 @@ describe "wrapping tests to stub any calls to geocoding" do
       Lane.count.should eql( 0 )
       Location.count.should eql( 0 )
     end
+
     it "should have children who are location objects" do
       Lane.build_from(@input).first.origin_location.class.should eql( Location )
       Lane.build_from(@input).first.destination_location.class.should eql( Location )
     end
+
     it "should return an array" do
       Lane.build_from(@input).class.should eql( Array )
     end
@@ -85,14 +87,28 @@ describe "wrapping tests to stub any calls to geocoding" do
   end
   
   describe "the uniqness of lanes" do
-    before(:each)do
-    end
+
     it "should use the == operator" do
 
     end
+    
     it "should find unique lanes with respect to a bid" do
-
+      location_one = Factory( :location, :location_string => "kansas", :mode => 0)
+      location_two = Factory( :location, :location_string => "california", :mode => 1)
+      bid  = Factory( :bid )
+      lane = Factory.build( :lane , :origin_location => location_one, :destination_location => location_two)
+      lane.is_unique?(bid).should eql( true )
     end
+    
+    it "should find duplicate lanes with respect to a bid" do
+      location_one = Factory( :location, :location_string => "kansas", :mode => 0)
+      location_two = Factory( :location, :location_string => "california", :mode => 1)
+      bid  = Factory( :bid )
+      lane = Factory( :lane ,:bid => bid, :origin_location => location_one, :destination_location => location_two)
+      another_lane = Factory.build( :lane, :origin_location => location_one, :destination_location => location_two)
+      another_lane.is_unique?(bid).should eql( false )
+    end
+    
     it "should find similar lanes in a universal context" do
       location_one = Factory( :location, :location_string => "kansas", :mode => 0)
       location_two = Factory( :location, :location_string => "california", :mode => 1)

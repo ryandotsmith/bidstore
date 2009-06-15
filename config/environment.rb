@@ -18,7 +18,4 @@ Rails::Initializer.run do |config|
   }
   config.gem "fastercsv"
   config.gem "geokit"
-  config.gem 'metaskills-acts_as_versioned' , 
-              :lib => 'acts_as_versioned'   , 
-              :source => 'http://gems.github.com/'
 end

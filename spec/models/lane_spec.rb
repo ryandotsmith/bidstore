@@ -7,39 +7,17 @@ describe "wrapping tests to stub any calls to geocoding" do
     GeoKit::Geocoders::MultiGeocoder.stub!(:geocode).and_return(fake_geocode)
   end
 
-  describe "building a new lane with location" do
-    before(:each) do
-      params = {}
-  
-    end
-
-  end
-
-  describe "making lanes from a CSV File" do
-
+  describe "taking an input file and returning an array of lanes" do
     before(:each) do
       @input = FasterCSV.generate do |csv|
         csv << [  "origin_zip","origin_city","origin_state","destination_zip","destination_city","destination_state",
                   "miles","volume","rates_per_mile",
                   "flat_rate_charge", "lane_capacity", "trailer_type", "lane_acceptance",
                   "comments", "check_all" ]
-        csv << [ "","","kansas","","", "california", "999", "100 pallets","8.99","","","reefer","true","good lane",""]
+        csv << [ nil,nil,"kansas",nil,nil, "california", "999", "100 pallets","8.99",nil,nil,"reefer","true","good lane",nil]
       end
     end#before
     
-    describe "getting the data from CSV " do
-      it "should return an array of lanes from CSV input" do
-        Lane.build_from( @input ).first.class.should eql( Lane )
-      end
-
-      it "should only make unique lanes" do
-        location_one = Factory( :location, :location_string => "kansas", :mode => 0)
-        location_two = Factory( :location, :location_string => "california", :mode => 1)
-        Factory( :lane , :origin_location => location_one, :destination_location => location_two)
-        Lane.build_from( @input ).empty?().should eql( true )
-      end
-    end# getting data from CSV
-
     describe "determining the origin and location" do
       # in the input file, the origin and destination may 
       # be represented as a zip or city or state. 
@@ -47,16 +25,29 @@ describe "wrapping tests to stub any calls to geocoding" do
         array = []
         FasterCSV.new( @input , :headers => true).each {|row| array << row.to_hash }
         row   = array.first
-        Lane.determine_location( :origin, row ).should eql( "kansas")        
+        Lane.determine_location( :origin, row ).should eql( "kansas" )
       end
       it "should choose a zip code over a state" do
-        row = { 'origin_zip' => '66216', 'origin_city' => 'lenexa', 'origin_state' => 'ks' }
+        row = { 'origin_zip' => '66216', 'origin_city' => nil , 'origin_state' => 'ks' }
         Lane.determine_location( :origin, row ).should eql( "66216" )
       end
       
     end# determine origin and location
-
-  end
+    
+    it "should not save any data to the DB" do
+      lanes = Lane.build_from(@input)
+      Lane.count.should eql( 0 )
+      Location.count.should eql( 0 )
+    end
+    it "should have children who are location objects" do
+      Lane.build_from(@input).first.origin_location.class.should eql( Location )
+      Lane.build_from(@input).first.destination_location.class.should eql( Location )
+    end
+    it "should return an array" do
+      Lane.build_from(@input).class.should eql( Array )
+    end
+    
+  end# desc of taking import file and return array of lanes
 
   describe "comparing lanes for equality" do
 
@@ -93,12 +84,22 @@ describe "wrapping tests to stub any calls to geocoding" do
 
   end
   
-  describe "testing a lane for uniqueness " do
-    it "should look around for similar lanes" do
+  describe "the uniqness of lanes" do
+    before(:each)do
+    end
+    it "should use the == operator" do
+
+    end
+    it "should find unique lanes with respect to a bid" do
+
+    end
+    it "should find similar lanes in a universal context" do
       location_one = Factory( :location, :location_string => "kansas", :mode => 0)
       location_two = Factory( :location, :location_string => "california", :mode => 1)
       lane = Factory( :lane , :origin_location => location_one, :destination_location => location_two)
       lane.is_unique?().should eql( false )
     end
+
   end
+
 end

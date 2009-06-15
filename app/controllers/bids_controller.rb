@@ -31,9 +31,10 @@ class BidsController < ApplicationController
   end
 
   def update
-    require "rubygems"; require "ruby-debug"; debugger 
     @bid = Bid.find( params[:id] )
     if @bid.update_attributes( params[:bid] )
+      lanes =  Lane.build_from(params[:csv_file]) 
+      @bid.build_unique_lanes( lanes )
       flash[:success] = "your bid was updated!"
       redirect_to @bid
     end

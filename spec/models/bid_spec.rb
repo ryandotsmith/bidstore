@@ -11,7 +11,6 @@ describe Bid do
   end
 end
 
-
 describe "creating a bid along with lanes" do
   before(:each) do
     fake_geocode = OpenStruct.new(:lat => 123.456, :lng => 123.456, :success => true)
@@ -45,27 +44,42 @@ describe "creating a bid along with lanes" do
 
 end
 
-describe "importing lanes from a csv file" do
+describe "take an array of lanes and save them with the bid" do
     before(:each) do
+      fake_geocode = OpenStruct.new(:lat => 123.456, :lng => 123.456, :success => true)
+      GeoKit::Geocoders::MultiGeocoder.stub!(:geocode).and_return(fake_geocode)
+
       @input = FasterCSV.generate do |csv|
         csv << [  "origin_zip","origin_city","origin_state","destination_zip","destination_city","destination_state",
                   "miles","volume","rates_per_mile",
                   "flat_rate_charge", "lane_capacity", "trailer_type", "lane_acceptance",
                   "comments", "check_all" ]
-        csv << [ "","","kansas","","", "california", "999", "100 pallets","8.99","","","reefer","true","good lane",""]
+        csv << [ nil,nil,"kansas",nil,nil, "california", "999", "100 pallets","8.99",nil,nil,"reefer","true","good lane",nil]
       end
     end
-
-    it "should put the data in the csv into a data structure" do
-      @bid = Factory( :bid )
-      @bid.build_unique_lanes( Lane.build_from(@input) )
+    
+    it "should save lanes that are unique to the bid" do
+      
+    end
+    
+    it "should only save lanes and locations when the bid is saved" do
+      @bid  = Factory( :bid )
+      lanes = Lane.build_from(@input)
+      Bid.count.should eql( 1 )
+      Lane.count.should eql( 0 )
+      Location.count.should eql( 0 )
+      @bid.lanes << lanes
+      Lane.count.should eql( 1 )
+      Location.count.should eql( 2 )      
+    end
+    it "should have all attributes saved upon the saving of a bid" do
+      @bid  = Factory( :bid )      
+      lanes = Lane.build_from(@input)
+      @bid.lanes << lanes
       @bid.save
-      @bid.lanes.count.should eql( 1 )
+      @bid.lanes.first.origin_location.location_string.should_not eql( nil )
+      @bid.lanes.first.destination_location.location_string.should_not eql( nil )
     end
 
-    it "should ensure that the import only keeps unique" do
-        
-    end
-
-end
+end# desc take lanes and save them with bid
 

@@ -111,7 +111,6 @@ class Seeker
 
   def scope( results )
     bids, lanes = nil, nil
-    require "rubygems"; require "ruby-debug"; debugger 
     case @scope_object.class.to_s
       when "Bid"
         return results if results[:lanes].nil?

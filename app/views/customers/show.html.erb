@@ -1,3 +1,7 @@
+<% content_for :search do %>
+		<%= render :partial => 'seekers/search', :locals => { :oid => @customer.id , :oclass => Customer }%>
+<% end %>
+
 <div id="center">
   <div id="context_nav">
     <h1><%= @customer.name %><%= link_to "edit", edit_customer_path, :style => 'margin-left:5px' %></h1>
